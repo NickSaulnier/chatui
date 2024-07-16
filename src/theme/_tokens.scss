@@ -1,0 +1,32 @@
+// Color tokens
+$white: #FFFFFF;
+$black: #000000;
+$light: #EDF4F2;
+$dark: #31473A;
+$primary: #7C8363;
+
+// Spacing tokens
+$xxs: 1px;
+$xs: 2px;
+$s: 4px;
+$m: 8px;
+$l: 16px;
+$xl: 32px;
+$xxl: 64px;
+
+:export {
+  // Color variables
+  white: $white;
+  black: $black;
+  light: $light;
+  dark: $dark;
+  primary: $primary;
+  // Spacing variables
+  xxs: $xxs;
+  xs: $xs;
+  s: $s;
+  m: $m;
+  l: $l;
+  xl: $xl;
+  xxl: $xxl;
+}
