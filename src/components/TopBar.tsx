@@ -1,7 +1,10 @@
 import { Box } from '@mui/material';
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 
-export function TopBar() {
+type TopBarProps = {
+  Icon: React.ElementType;
+};
+
+export function TopBar({ Icon }: TopBarProps) {
   return (
     <Box
       className="box"
@@ -16,7 +19,7 @@ export function TopBar() {
         alignItems: 'center',
       }}
     >
-      <RequestQuoteIcon
+      <Icon
         sx={{ color: 'background.default', height: '45px', width: '45px' }}
       />
     </Box>
