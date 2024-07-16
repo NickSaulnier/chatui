@@ -4,7 +4,7 @@ This is a minimal ChatUI project. It's intended purpose is to make it easy to bu
 
 Example UI:
 
-![Example chatui](/public/chatui-example.png?raw=true 'CFO Bot Example')
+<img src="/public/chatui-example.png" alt="drawing" width="200"/>
 
 ## Available Scripts
 
