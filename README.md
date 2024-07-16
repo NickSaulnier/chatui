@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# chatui
 
 This is a minimal ChatUI project. Its intended purpose is to make it easy to build a chatbot UI and customize its look and feel.
 
