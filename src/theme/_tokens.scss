@@ -14,6 +14,11 @@ $l: 16px;
 $xl: 32px;
 $xxl: 64px;
 
+// Typography tokens
+$body1FontFamily: "Open Sans", sans-serif;
+$body1FontSize: 13px;
+$body1FontWeight: 400;
+
 :export {
   // Color variables
   white: $white;
@@ -29,4 +34,8 @@ $xxl: 64px;
   l: $l;
   xl: $xl;
   xxl: $xxl;
+  // Typography variables
+  body1FontFamily: $body1FontFamily;
+  body1FontSize: $body1FontSize;
+  body1FontWeight: $body1FontWeight;
 }

@@ -21,4 +21,17 @@ export const customTheme = createTheme({
       borderRadius: tokens.xxs,
     },
     spacing: [tokens.xs, tokens.s, tokens.m, tokens.l, tokens.xl, tokens.xxl],
+    typography: {
+      // fontSize: tokens.fontSize,
+      // fontWeightLight: tokens.fontWeightLight,
+      // fontWeightRegular: tokens.fontWeightRegular,
+      // fontWeightMedium: tokens.fontWeightMedium,
+      // fontWeightBold: tokens.fontWeightBold,
+      body1: {
+        fontSize: tokens.body1FontSize,
+        fontWeight: tokens.body1FontWeight,
+        fontFamily: tokens.body1FontFamily,
+        color: tokens.white,
+      },
+    }
   });
