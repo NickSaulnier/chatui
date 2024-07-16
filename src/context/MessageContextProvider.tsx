@@ -16,15 +16,9 @@ const MessageContextProvider = ({
   children: any;
   inputConversations?: Array<Conversation>;
 }) => {
-  const [conversations, setConversations] = useState<Array<Conversation>>(
-    inputConversations ?? [],
-  );
-  const [currentConversationIndex, setCurrentConversationIndex] = useState<
-    number | null
-  >(
-    inputConversations && inputConversations.length > 0
-      ? inputConversations.length - 1
-      : null,
+  const [conversations, setConversations] = useState<Array<Conversation>>(inputConversations ?? []);
+  const [currentConversationIndex, setCurrentConversationIndex] = useState<number | null>(
+    inputConversations && inputConversations.length > 0 ? inputConversations.length - 1 : null,
   );
 
   const addConversation = useCallback(
@@ -34,25 +28,24 @@ const MessageContextProvider = ({
         setCurrentConversationIndex(newConversations.length - 1);
       }
     },
-    [],
+    [setConversations, setCurrentConversationIndex],
   );
 
-  const addMessage = useCallback((message: Message) => {
-    if (currentConversationIndex !== null) {
-      conversations[currentConversationIndex].messages.push(message);
-    }
-  }, []);
+  const addMessage = useCallback(
+    (message: Message) => {
+      if (currentConversationIndex !== null) {
+        conversations[currentConversationIndex].messages.push(message);
+      }
+    },
+    [conversations, currentConversationIndex],
+  );
 
   const getCurrentConversation = useCallback(() => {
-    return currentConversationIndex !== null
-      ? conversations[currentConversationIndex]
-      : null;
-  }, []);
+    return currentConversationIndex !== null ? conversations[currentConversationIndex] : null;
+  }, [currentConversationIndex, conversations]);
 
   return (
-    <MessageContext.Provider
-      value={{ addConversation, addMessage, getCurrentConversation }}
-    >
+    <MessageContext.Provider value={{ addConversation, addMessage, getCurrentConversation }}>
       {children}
     </MessageContext.Provider>
   );
