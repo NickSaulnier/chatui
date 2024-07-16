@@ -1,8 +1,12 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 
 import { INPUT_BORDER_RADIUS } from './constants';
 import { useContext } from 'react';
 import { MessageContext } from '../context/MessageContextProvider';
+import { ChatMessage } from './ChatMessage';
+import { Agent } from '../context/types';
 
 export function MessageContainer() {
   const { getCurrentConversation } = useContext(MessageContext);
@@ -16,9 +20,7 @@ export function MessageContainer() {
         flex: 'auto',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: `${theme.spacing(2)} ${theme.spacing(1)} ${theme.spacing(
-          1,
-        )} ${theme.spacing(1)}`,
+        margin: `${theme.spacing(2)} ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)}`,
       })}
     >
       <Box
@@ -26,12 +28,14 @@ export function MessageContainer() {
           height: '100%',
           width: '100%',
           margin: `${theme.spacing(2)}`,
-          border: `solid 2px ${theme.palette.primary.dark}`,
-          borderRadius: `${INPUT_BORDER_RADIUS}px`,
         })}
       >
         {currentConversation?.messages.map((message) => (
-          <Typography>{message.content}</Typography>
+          <ChatMessage
+            message={message}
+            Icon={message.agent === Agent.User ? PersonIcon : SmartToyIcon}
+            key={message.timestamp}
+          />
         ))}
       </Box>
     </Box>
