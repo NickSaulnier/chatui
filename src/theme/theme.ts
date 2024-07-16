@@ -16,6 +16,7 @@ export const customTheme = createTheme({
         primary: tokens.white,
         secondary: tokens.black,
       },
+      grey: tokens.grey,
     },
     shape: {
       borderRadius: tokens.xxs,

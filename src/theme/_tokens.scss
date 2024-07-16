@@ -4,6 +4,7 @@ $black: #000000;
 $light: #EDF4F2;
 $dark: #31473A;
 $primary: #7C8363;
+$grey: #292929;
 
 // Spacing tokens
 $xxs: 1px;
@@ -26,6 +27,7 @@ $body1FontWeight: 400;
   light: $light;
   dark: $dark;
   primary: $primary;
+  grey: $grey;
   // Spacing variables
   xxs: $xxs;
   xs: $xs;
