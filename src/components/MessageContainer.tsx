@@ -21,6 +21,7 @@ export function MessageContainer() {
         justifyContent: 'center',
         alignItems: 'center',
         margin: `${theme.spacing(2)} ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)}`,
+        overflowY: 'auto',
       })}
     >
       <Box
