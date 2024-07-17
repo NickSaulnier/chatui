@@ -1,6 +1,6 @@
 # chatui
 
-This is a minimal ChatUI project. Its intended purpose is to make it easy to build a chatbot UI and customize its look and feel.
+This is a minimal ChatUI project. Its intended purpose is to facilitate the process of building AI chatbots, providing components that are easily customizable and simple to use.
 
 Example UI:
 
