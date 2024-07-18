@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 
-import { INPUT_BORDER_RADIUS } from './constants';
 import { useContext } from 'react';
 import { MessageContext } from '../context/MessageContextProvider';
 import { ChatMessage } from './ChatMessage';
