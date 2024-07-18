@@ -19,7 +19,7 @@ export const customTheme = createTheme({
       grey: tokens.grey,
     },
     shape: {
-      borderRadius: tokens.xxs,
+      borderRadius: 1,
     },
     spacing: [tokens.xs, tokens.s, tokens.m, tokens.l, tokens.xl, tokens.xxl],
     typography: {
