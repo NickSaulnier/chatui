@@ -30,7 +30,17 @@ export function ChatMessage({ Icon, message }: ChatMessageProps) {
           padding: `${theme.spacing(1)}`,
         })}
       >
-        <Icon sx={{ color: `${backgroundColor}` }} />
+        <Icon
+          sx={{
+            color: `${theme.palette.background.default}`,
+            backgroundColor: `${backgroundColor}`,
+            marginTop: 'auto',
+            marginRight: `${theme.spacing(1)}`,
+            border: '1px solid transparent',
+            borderRadius: '20px',
+            padding: '2px',
+          }}
+        />
         <Typography
           sx={(theme) => ({
             border: 'solid 1px transparent',
