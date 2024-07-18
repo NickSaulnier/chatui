@@ -20,7 +20,7 @@ export function TextInput() {
           width: '100%',
           margin: `${theme.spacing(1)} ${theme.spacing(2)}`,
           '& .MuiTextField-root': {
-            width: '100%', // Leave space for the button
+            width: '100%',
             minHeight: `${MIN_INPUT_HEIGHT}px`,
           },
           '& .MuiOutlinedInput-root': {
