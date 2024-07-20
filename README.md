@@ -12,7 +12,7 @@ Example UI:
 - Create loading components/styling for waiting on response
 - Add state to the TextInput component and hook it up to the Apollo client
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
-- Fix styling for desktop (i.e. add appropriate margins around the ChatContainer, add breakpoint tokens to theme)
+- Fix styling for desktop (i.e. add appropriate margins around the ChatContainer)
 
 Longer Term:
 

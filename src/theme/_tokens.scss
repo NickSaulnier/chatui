@@ -1,3 +1,10 @@
+// Breakpoint tokens
+$break-xs: 400;
+$break-sm: 600;
+$break-md: 960;
+$break-lg: 1280;
+$break-xl: 1920;
+
 // Color tokens
 $white: #FFFFFF;
 $black: #000000;
@@ -9,9 +16,9 @@ $grey: #292929;
 // Spacing tokens
 $xxs: 1px;
 $xs: 2px;
-$s: 4px;
-$m: 8px;
-$l: 16px;
+$sm: 4px;
+$md: 8px;
+$lg: 16px;
 $xl: 32px;
 $xxl: 64px;
 
@@ -21,6 +28,12 @@ $body1FontSize: 13px;
 $body1FontWeight: 400;
 
 :export {
+  // Breakpoint variables
+  breakXs: $break-xs;
+  breakSm: $break-sm;
+  breakMd: $break-md;
+  breakLg: $break-lg;
+  breakXl: $break-xl;
   // Color variables
   white: $white;
   black: $black;
@@ -31,9 +44,9 @@ $body1FontWeight: 400;
   // Spacing variables
   xxs: $xxs;
   xs: $xs;
-  s: $s;
-  m: $m;
-  l: $l;
+  sm: $sm;
+  md: $md;
+  lg: $lg;
   xl: $xl;
   xxl: $xxl;
   // Typography variables

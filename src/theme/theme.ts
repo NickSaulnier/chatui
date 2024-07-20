@@ -3,6 +3,15 @@ import { createTheme } from "@mui/material";
 import tokens from './_tokens.scss';
 
 export const customTheme = createTheme({
+    breakpoints: {
+      values: {
+        xs: tokens.breakXs,
+        sm: tokens.breakSm,
+        md: tokens.breakMd,
+        lg: tokens.breakLg,
+        xl: tokens.breakXl,
+      },
+    },
     palette: {
       background: {
         default: tokens.white,
@@ -21,7 +30,7 @@ export const customTheme = createTheme({
     shape: {
       borderRadius: 1,
     },
-    spacing: [tokens.xs, tokens.s, tokens.m, tokens.l, tokens.xl, tokens.xxl],
+    spacing: [tokens.xs, tokens.sm, tokens.md, tokens.lg, tokens.xl, tokens.xxl],
     typography: {
       body1: {
         fontSize: tokens.body1FontSize,
