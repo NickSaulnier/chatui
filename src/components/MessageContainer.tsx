@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { MessageContext } from '../context/MessageContextProvider';
 import { ChatMessage } from './ChatMessage';
 import { Agent } from '../context/types';
+import { MD_WINDOW_WIDTH } from './constants';
 
 export function MessageContainer() {
   const { getCurrentConversation } = useContext(MessageContext);
@@ -21,6 +22,9 @@ export function MessageContainer() {
         alignItems: 'center',
         margin: `${theme.spacing(2)} ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)}`,
         overflowY: 'auto',
+        [theme.breakpoints.up('md')]: {
+          width: `${MD_WINDOW_WIDTH}px`,
+        },
       })}
     >
       <Box

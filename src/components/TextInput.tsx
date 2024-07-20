@@ -1,17 +1,20 @@
 import { Box, TextField } from '@mui/material';
 
 import { InputButton } from './InputButton';
-import { INPUT_BORDER_RADIUS, MIN_INPUT_HEIGHT } from './constants';
+import { INPUT_BORDER_RADIUS, MD_WINDOW_WIDTH, MIN_INPUT_HEIGHT } from './constants';
 
 export function TextInput() {
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-      }}
+        [theme.breakpoints.up('md')]: {
+          width: `${MD_WINDOW_WIDTH}px`,
+        },
+      })}
     >
       <Box
         component="form"

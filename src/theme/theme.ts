@@ -5,11 +5,11 @@ import tokens from './_tokens.scss';
 export const customTheme = createTheme({
     breakpoints: {
       values: {
-        xs: tokens.breakXs,
-        sm: tokens.breakSm,
-        md: tokens.breakMd,
-        lg: tokens.breakLg,
-        xl: tokens.breakXl,
+        xs: Number(tokens.breakXs),
+        sm: Number(tokens.breakSm),
+        md: Number(tokens.breakMd),
+        lg: Number(tokens.breakLg),
+        xl: Number(tokens.breakXl),
       },
     },
     palette: {
