@@ -6,6 +6,13 @@ Example UI:
 
 <img src="/public/chatui-example.png" alt="drawing" width="200"/>
 
+## TODO
+
+- Create Apollo client/server with OpenAI API support and test with vLLM/OLlama
+- Create loading components/styling for waiting on response
+- Add state to the TextInput component and hook it up to the Apollo client
+- Consider any refactors that with make the project/components/styling more general
+
 ## Available Scripts
 
 In the project directory, you can run:
