@@ -11,7 +11,15 @@ Example UI:
 - Create Apollo client/server with OpenAI API support and test with vLLM/OLlama
 - Create loading components/styling for waiting on response
 - Add state to the TextInput component and hook it up to the Apollo client
-- Consider any refactors that with make the project/components/styling more general
+- Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
+- Fix styling for desktop (i.e. add appropriate margins around the ChatContainer)
+
+Longer Term:
+
+- Create tabbed layout with navigation bar
+- Add page for managing (viewing, continuing, naming, etc.) multiple conversations
+- Add support for specifying model?
+- Customize and add features to text input/text display?
 
 ## Available Scripts
 
