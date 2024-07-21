@@ -2,9 +2,10 @@ import React, { useCallback, useState } from 'react';
 import { Conversation, Message, MessageContextParams } from './types';
 
 const defaultMessageContext: MessageContextParams = {
-  addConversation: (conversations: Array<Conversation>) => {},
+  addConversation: (conversation: Conversation) => {},
   addMessage: (message: Message) => {},
   getCurrentConversation: () => null,
+  currentMessages: [],
 };
 
 export const MessageContext = React.createContext(defaultMessageContext);
@@ -20,13 +21,13 @@ const MessageContextProvider = ({
   const [currentConversationIndex, setCurrentConversationIndex] = useState<number | null>(
     inputConversations && inputConversations.length > 0 ? inputConversations.length - 1 : null,
   );
+  const [currentMessages, setCurrentMessages] = useState<Array<Message>>(
+    inputConversations ? inputConversations[inputConversations.length - 1].messages : [],
+  );
 
   const addConversation = useCallback(
-    (newConversations: Array<Conversation>) => {
-      if (newConversations.length > 0) {
-        setConversations(newConversations);
-        setCurrentConversationIndex(newConversations.length - 1);
-      }
+    (newConversation: Conversation) => {
+      setConversations([...conversations, newConversation]);
     },
     [setConversations, setCurrentConversationIndex],
   );
@@ -35,6 +36,7 @@ const MessageContextProvider = ({
     (message: Message) => {
       if (currentConversationIndex !== null) {
         conversations[currentConversationIndex].messages.push(message);
+        setCurrentMessages([...conversations[currentConversationIndex].messages]);
       }
     },
     [conversations, currentConversationIndex],
@@ -45,7 +47,9 @@ const MessageContextProvider = ({
   }, [currentConversationIndex, conversations]);
 
   return (
-    <MessageContext.Provider value={{ addConversation, addMessage, getCurrentConversation }}>
+    <MessageContext.Provider
+      value={{ addConversation, addMessage, getCurrentConversation, currentMessages }}
+    >
       {children}
     </MessageContext.Provider>
   );

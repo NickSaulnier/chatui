@@ -5,10 +5,15 @@ import { INPUT_BORDER_RADIUS } from './constants';
 
 const BUTTON_DIM = '28px';
 
-export function InputButton() {
+type InputButtonProps = {
+  disabled: boolean;
+  onClick: () => void;
+};
+
+export function InputButton({ disabled, onClick }: InputButtonProps) {
   return (
     <Button
-      onClick={() => {}}
+      onClick={onClick}
       sx={(theme) => ({
         height: BUTTON_DIM,
         width: BUTTON_DIM,
@@ -20,8 +25,11 @@ export function InputButton() {
         alignItems: 'center',
         backgroundColor: 'primary.dark',
         margin: `auto ${theme.spacing(0)} ${theme.spacing(0)} 0`,
+        '&:hover': { backgroundColor: 'primary.main' },
+        '&:disabled': { opacity: '0.4' },
       })}
       disableRipple
+      disabled={disabled}
     >
       <ArrowUpwardIcon sx={{ color: 'background.default' }} />
     </Button>

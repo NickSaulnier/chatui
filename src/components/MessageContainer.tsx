@@ -2,15 +2,14 @@ import { Box } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { MessageContext } from '../context/MessageContextProvider';
 import { ChatMessage } from './ChatMessage';
-import { Agent } from '../context/types';
+import { Agent, Message } from '../context/types';
 import { MD_WINDOW_WIDTH } from './constants';
 
 export function MessageContainer() {
-  const { getCurrentConversation } = useContext(MessageContext);
-  const currentConversation = getCurrentConversation();
+  const { currentMessages } = useContext(MessageContext);
 
   return (
     <Box
@@ -41,7 +40,7 @@ export function MessageContainer() {
           margin: `${theme.spacing(2)}`,
         })}
       >
-        {currentConversation?.messages.map((message) => (
+        {currentMessages.map((message) => (
           <ChatMessage
             message={message}
             Icon={message.agent === Agent.User ? PersonIcon : SmartToyIcon}
