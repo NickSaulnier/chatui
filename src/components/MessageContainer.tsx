@@ -22,6 +22,13 @@ export function MessageContainer() {
         alignItems: 'center',
         margin: `${theme.spacing(2)} ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)}`,
         overflowY: 'auto',
+        scrollbarWidth: 'none', // Hide the scrollbar for firefox
+        '&::-webkit-scrollbar': {
+          display: 'none', // Hide the scrollbar for WebKit browsers (Chrome, Safari, Edge, etc.)
+        },
+        '&-ms-overflow-style:': {
+          display: 'none', // Hide the scrollbar for IE
+        },
         [theme.breakpoints.up('sm')]: {
           width: `${MD_WINDOW_WIDTH}px`,
         },
