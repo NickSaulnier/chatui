@@ -8,9 +8,8 @@ Example UI:
 
 ## TODO
 
-- Add code to use OpenAI API to fetch chat completions
+- Add code to use OpenAI API to fetch chat completions, test with OLlama
 - Create loading components/styling for waiting on response
-- Add state to the TextInput component
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
 - Add githooks, lock down main branch
 
