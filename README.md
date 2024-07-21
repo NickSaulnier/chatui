@@ -13,11 +13,13 @@ Example UI:
 - Add state to the TextInput component and hook it up to the Apollo client
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
 - Add githooks, lock down main branch
+- Hide scroll bar from main window
 
 Longer Term:
 
 - Create tabbed layout with navigation bar
 - Add page for managing (viewing, continuing, naming, etc.) multiple conversations
+- Create more compelling TopBar component
 - Add support for specifying model?
 - Customize and add features to text input/text display?
 
