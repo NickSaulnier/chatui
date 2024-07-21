@@ -22,7 +22,7 @@ export function MessageContainer() {
         alignItems: 'center',
         margin: `${theme.spacing(2)} ${theme.spacing(1)} ${theme.spacing(1)} ${theme.spacing(1)}`,
         overflowY: 'auto',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
           width: `${MD_WINDOW_WIDTH}px`,
         },
       })}

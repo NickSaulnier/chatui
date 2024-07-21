@@ -11,7 +11,7 @@ export function TextInput() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
           width: `${MD_WINDOW_WIDTH}px`,
         },
       })}
