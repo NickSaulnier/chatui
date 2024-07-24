@@ -45,6 +45,7 @@ export function ChatMessage({ Icon, message }: ChatMessageProps) {
           sx={(theme) => ({
             border: 'solid 1px transparent',
             borderRadius: '12px',
+            borderBottomLeftRadius: '0',
             backgroundColor: `${backgroundColor}`,
             padding: `${theme.spacing(2)}`,
           })}
