@@ -1,15 +1,15 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { MessageContext } from '../context/MessageContextProvider';
 import { ChatMessage } from './ChatMessage';
-import { Agent, Message } from '../context/types';
-import { MD_WINDOW_WIDTH } from './constants';
+import { Agent } from '../context/types';
 
 export function MessageContainer() {
   const { currentMessages } = useContext(MessageContext);
+  const theme = useTheme();
 
   return (
     <Box
@@ -29,7 +29,7 @@ export function MessageContainer() {
           display: 'none', // Hide the scrollbar for IE
         },
         [theme.breakpoints.up('sm')]: {
-          width: `${MD_WINDOW_WIDTH}px`,
+          width: `${theme.breakpoints.values.sm}px`,
         },
       })}
     >

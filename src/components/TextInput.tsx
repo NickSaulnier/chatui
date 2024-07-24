@@ -2,17 +2,28 @@ import { Box, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
 
 import { InputButton } from './InputButton';
-import { INPUT_BORDER_RADIUS, MD_WINDOW_WIDTH, MIN_INPUT_HEIGHT } from './constants';
+import { INPUT_BORDER_RADIUS, MIN_INPUT_HEIGHT } from './constants';
 import { MessageContext } from '../context/MessageContextProvider';
 import { Agent } from '../context/types';
+import { fetchOpenAICompletion } from '../requests/OpenAi';
 
 export function TextInput() {
   const [textInput, setTextInput] = useState('');
 
   const { addMessage } = useContext(MessageContext);
 
-  const handleInputEnter = () => {
+  const handleInputEnter = async () => {
     addMessage({ agent: Agent.User, timestamp: Date.now(), content: textInput });
+    // TODO: Add state and UI to select model, server URL, model params, etc.
+    //
+    // const completion = fetchOpenAICompletion({
+    //   prompt: textInput,
+    //   baseURL: 'http://localhost:11434/v1',
+    //   apiKey: 'ollama',
+    //   model: 'llama3',
+    //   messages: [],
+    // });
+    // console.log(completion);
     setTextInput('');
   };
 
@@ -24,7 +35,7 @@ export function TextInput() {
         justifyContent: 'center',
         alignItems: 'center',
         [theme.breakpoints.up('sm')]: {
-          width: `${MD_WINDOW_WIDTH}px`,
+          width: `${theme.breakpoints.values.sm}px`,
         },
       })}
     >

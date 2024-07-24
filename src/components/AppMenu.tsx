@@ -9,15 +9,12 @@ import {
   ListItemText,
   useTheme,
 } from '@mui/material';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import React, { useState } from 'react';
-import SettingsIcon from '@mui/icons-material/Settings';
-
-const listStrings = ['Conversations', 'Settings'];
-const listIcons = [QuestionAnswerIcon, SettingsIcon];
+import { Link } from 'react-router-dom';
+import { ROUTE_ICONS, ROUTE_LINKS, ROUTE_STRINGS } from './constants';
 
 const getIconAsNode = (index: number) => {
-  const Icon = listIcons[index];
+  const Icon = ROUTE_ICONS[index];
 
   return <Icon sx={{ color: 'primary.dark' }} />;
 };
@@ -47,20 +44,22 @@ export function AppMenu() {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {listStrings.map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{getIconAsNode(index)}</ListItemIcon>
-              <ListItemText
-                primary={text}
-                primaryTypographyProps={{
-                  color: theme.palette.text.secondary,
-                  fontSize: '16px',
-                  fontWeight: 500,
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
+        {ROUTE_STRINGS.map((text: string, index: number) => (
+          <Link to={`${ROUTE_LINKS[index]}`} style={{ textDecoration: 'none' }}>
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>{getIconAsNode(index)}</ListItemIcon>
+                <ListItemText
+                  primary={text}
+                  primaryTypographyProps={{
+                    color: theme.palette.text.secondary,
+                    fontSize: '16px',
+                    fontWeight: 500,
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>
