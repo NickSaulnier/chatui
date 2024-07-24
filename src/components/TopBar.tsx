@@ -1,10 +1,7 @@
 import { Box } from '@mui/material';
+import { AppMenu } from './AppMenu';
 
-type TopBarProps = {
-  Icon: React.ElementType;
-};
-
-export function TopBar({ Icon }: TopBarProps) {
+export function TopBar() {
   return (
     <Box
       className="box"
@@ -15,13 +12,11 @@ export function TopBar({ Icon }: TopBarProps) {
         backgroundColor: 'primary.dark',
         marginBottom: 'auto',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
       }}
     >
-      <Icon
-        sx={{ color: 'background.default', height: '45px', width: '45px' }}
-      />
+      <AppMenu />
     </Box>
   );
 }

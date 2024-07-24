@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@mui/material';
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import React from 'react';
 import { TopBar } from './TopBar';
 import { ChatContainer } from './ChatContainer';
@@ -12,7 +11,7 @@ export function EntryPoint() {
     <React.StrictMode>
       <ThemeProvider theme={customTheme}>
         <MessageContextProvider inputConversations={mockConversation}>
-          <TopBar Icon={RequestQuoteIcon} />
+          <TopBar />
           <ChatContainer />
         </MessageContextProvider>
       </ThemeProvider>
