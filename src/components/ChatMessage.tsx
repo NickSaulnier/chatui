@@ -1,4 +1,4 @@
-import { Box, Theme, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { Agent, Message } from '../context/types';
 
 type ChatMessageProps = {
