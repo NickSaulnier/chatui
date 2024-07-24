@@ -16,14 +16,14 @@ export function TextInput() {
     addMessage({ agent: Agent.User, timestamp: Date.now(), content: textInput });
     // TODO: Add state and UI to select model, server URL, model params, etc.
     //
-    // const completion = fetchOpenAICompletion({
-    //   prompt: textInput,
-    //   baseURL: 'http://localhost:11434/v1',
-    //   apiKey: 'ollama',
-    //   model: 'llama3',
-    //   messages: [],
-    // });
-    // console.log(completion);
+    const completion = fetchOpenAICompletion({
+      prompt: textInput,
+      baseURL: 'http://localhost:11434/v1',
+      apiKey: 'ollama',
+      model: 'llama3',
+      messages: [],
+    });
+    console.log(completion);
     setTextInput('');
   };
 
