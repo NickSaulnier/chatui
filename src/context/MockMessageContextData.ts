@@ -21,4 +21,22 @@ export const mockConversation: Array<Conversation> = [
       headers: {},
     },
   },
+  {
+    messages: [
+      {
+        agent: Agent.User,
+        timestamp: 1382086395001,
+        content: 'A second conversation, just for example.',
+      },
+      {
+        agent: Agent.Bot,
+        timestamp: 1382086395009,
+        content: 'This is a second mock conversation.',
+      },
+    ],
+    chatConfiguration: {
+      chatApiEndpoint: 'fake.endpoint',
+      headers: {},
+    },
+  },
 ];
