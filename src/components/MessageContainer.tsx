@@ -1,15 +1,14 @@
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-
 import { useContext } from 'react';
+
 import { MessageContext } from '../context/MessageContextProvider';
 import { ChatMessage } from './ChatMessage';
 import { Agent } from '../context/types';
 
 export function MessageContainer() {
   const { currentMessages } = useContext(MessageContext);
-  const theme = useTheme();
 
   return (
     <Box

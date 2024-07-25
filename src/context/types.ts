@@ -1,7 +1,7 @@
 export enum Agent {
   User = 'user',
-  Bot = 'bot'
-};
+  Bot = 'bot',
+}
 
 export type Message = {
   agent: Agent;
@@ -21,7 +21,7 @@ export type ChatConfiguration = {
   // Indicates whether the user agent should send or receive cookies from the other domain
   // in the case of cross-origin requests.
   credentials?: RequestCredentials;
-}
+};
 
 export type Conversation = {
   messages: Array<Message>;
@@ -33,4 +33,5 @@ export type MessageContextParams = {
   addMessage: (message: Message) => void;
   getCurrentConversation: () => Conversation | null;
   currentMessages: Array<Message>;
+  conversations: Array<Conversation>;
 };

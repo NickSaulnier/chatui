@@ -6,6 +6,7 @@ const defaultMessageContext: MessageContextParams = {
   addMessage: (message: Message) => {},
   getCurrentConversation: () => null,
   currentMessages: [],
+  conversations: [],
 };
 
 export const MessageContext = React.createContext(defaultMessageContext);
@@ -48,7 +49,13 @@ const MessageContextProvider = ({
 
   return (
     <MessageContext.Provider
-      value={{ addConversation, addMessage, getCurrentConversation, currentMessages }}
+      value={{
+        addConversation,
+        addMessage,
+        getCurrentConversation,
+        currentMessages,
+        conversations,
+      }}
     >
       {children}
     </MessageContext.Provider>
