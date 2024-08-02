@@ -20,6 +20,7 @@ export const mockConversation: Array<Conversation> = [
       chatApiEndpoint: 'fake.endpoint',
       headers: {},
     },
+    summary: 'A mock conversation.',
   },
   {
     messages: [
@@ -38,5 +39,6 @@ export const mockConversation: Array<Conversation> = [
       chatApiEndpoint: 'fake.endpoint',
       headers: {},
     },
+    summary: 'A second mock conversation.',
   },
 ];

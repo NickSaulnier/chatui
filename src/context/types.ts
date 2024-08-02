@@ -26,6 +26,7 @@ export type ChatConfiguration = {
 export type Conversation = {
   messages: Array<Message>;
   chatConfiguration: ChatConfiguration;
+  summary?: string;
 };
 
 export type MessageContextParams = {
