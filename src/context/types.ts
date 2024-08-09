@@ -33,6 +33,7 @@ export type MessageContextParams = {
   addConversation: (conversation: Conversation) => void;
   addMessage: (message: Message) => void;
   getCurrentConversation: () => Conversation | null;
+  setCurrentConversation: (index: number) => void;
   currentMessages: Array<Message>;
   conversations: Array<Conversation>;
 };

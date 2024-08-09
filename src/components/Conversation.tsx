@@ -2,10 +2,13 @@ import { Box, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import type { Conversation } from '../context/types';
 import { formatTimestamp } from './utils';
 import { ConversationActionButton } from './ConversationActionButton';
+import { MessageContext } from '../context/MessageContextProvider';
 
 const ACTION_BUTTONS: {
   tooltipTitle: string;
@@ -27,6 +30,9 @@ type ConversationProps = {
 };
 
 export function Conversation({ conversation, index }: ConversationProps) {
+  const navigate = useNavigate();
+  const { setCurrentConversation } = useContext(MessageContext);
+
   return (
     <ListItem
       sx={(theme) => ({
@@ -40,6 +46,10 @@ export function Conversation({ conversation, index }: ConversationProps) {
         },
       })}
       key={`conversation-${index}`}
+      onClick={() => {
+        setCurrentConversation(index);
+        navigate('/');
+      }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
         <ListItemAvatar sx={{ minWidth: '37px', maxWidth: '37px' }}>

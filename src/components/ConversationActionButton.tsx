@@ -24,6 +24,9 @@ export function ConversationActionButton({ tooltipTitle, Icon }: ConversationAct
         }}
         // Inline style to remove the default hover effect
         style={{ backgroundColor: 'transparent' }}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
       >
         <Icon
           sx={{

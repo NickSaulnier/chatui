@@ -5,6 +5,7 @@ const defaultMessageContext: MessageContextParams = {
   addConversation: (conversation: Conversation) => {},
   addMessage: (message: Message) => {},
   getCurrentConversation: () => null,
+  setCurrentConversation: () => {},
   currentMessages: [],
   conversations: [],
 };
@@ -47,12 +48,21 @@ const MessageContextProvider = ({
     return currentConversationIndex !== null ? conversations[currentConversationIndex] : null;
   }, [currentConversationIndex, conversations]);
 
+  const setCurrentConversation = useCallback(
+    (index: number) => {
+      setCurrentConversationIndex(index);
+      setCurrentMessages(conversations[index].messages);
+    },
+    [setCurrentConversationIndex, setCurrentMessages],
+  );
+
   return (
     <MessageContext.Provider
       value={{
         addConversation,
         addMessage,
         getCurrentConversation,
+        setCurrentConversation,
         currentMessages,
         conversations,
       }}
