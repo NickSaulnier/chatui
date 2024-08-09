@@ -24,14 +24,14 @@ const MessageContextProvider = ({
     inputConversations && inputConversations.length > 0 ? inputConversations.length - 1 : null,
   );
   const [currentMessages, setCurrentMessages] = useState<Array<Message>>(
-    inputConversations ? inputConversations[inputConversations.length - 1].messages : [],
+    inputConversations ? inputConversations[inputConversations.length - 1]?.messages : [],
   );
 
   const addConversation = useCallback(
     (newConversation: Conversation) => {
       setConversations([...conversations, newConversation]);
     },
-    [setConversations, setCurrentConversationIndex],
+    [setConversations],
   );
 
   const addMessage = useCallback(
@@ -39,9 +39,25 @@ const MessageContextProvider = ({
       if (currentConversationIndex !== null) {
         conversations[currentConversationIndex].messages.push(message);
         setCurrentMessages([...conversations[currentConversationIndex].messages]);
+      } else {
+        const newConversation = {
+          // TODO: Add settings page and pull down current values
+          messages: [message],
+          chatConfiguration: { chatApiEndpoint: '', headers: {} },
+        };
+
+        addConversation(newConversation);
+        setCurrentConversationIndex(0);
+        setCurrentMessages([...newConversation.messages]);
       }
     },
-    [conversations, currentConversationIndex],
+    [
+      conversations,
+      currentConversationIndex,
+      addConversation,
+      setCurrentConversationIndex,
+      setCurrentMessages,
+    ],
   );
 
   const getCurrentConversation = useCallback(() => {
@@ -51,9 +67,9 @@ const MessageContextProvider = ({
   const setCurrentConversation = useCallback(
     (index: number) => {
       setCurrentConversationIndex(index);
-      setCurrentMessages(conversations[index].messages);
+      setCurrentMessages([...conversations[index].messages]);
     },
-    [setCurrentConversationIndex, setCurrentMessages],
+    [setCurrentConversationIndex, setCurrentMessages, conversations],
   );
 
   return (

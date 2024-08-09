@@ -39,7 +39,7 @@ export function MessageContainer() {
           margin: `${theme.spacing(2)}`,
         })}
       >
-        {currentMessages.map((message) => (
+        {currentMessages?.map((message) => (
           <ChatMessage
             message={message}
             Icon={message.agent === Agent.User ? PersonIcon : SmartToyIcon}

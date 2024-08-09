@@ -45,7 +45,6 @@ export function Conversation({ conversation, index }: ConversationProps) {
           cursor: 'pointer',
         },
       })}
-      key={`conversation-${index}`}
       onClick={() => {
         setCurrentConversation(index);
         navigate('/');

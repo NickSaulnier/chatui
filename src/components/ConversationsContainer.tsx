@@ -44,7 +44,7 @@ export function ConversationsContainer() {
           }}
         >
           {conversations.map((conversation, index) => (
-            <Conversation conversation={conversation} index={index} />
+            <Conversation key={`conversation-${index}`} conversation={conversation} index={index} />
           ))}
         </List>
       </Box>
