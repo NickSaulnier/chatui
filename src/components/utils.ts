@@ -13,7 +13,7 @@ const monthIndexToMonth = [
   'Dec',
 ];
 
-export function formatTimestamp(timestamp: number) {
+export function formatTimestamp(timestamp: number): string {
   const date = new Date(timestamp);
   return `${monthIndexToMonth[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()}`;
 }
