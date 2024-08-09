@@ -33,7 +33,7 @@ const MessageContextProvider = ({
     (newConversation: Conversation) => {
       setConversations([...conversations, newConversation]);
     },
-    [setConversations],
+    [conversations, setConversations],
   );
 
   const addMessage = useCallback(
