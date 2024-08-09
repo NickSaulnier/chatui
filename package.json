@@ -57,6 +57,7 @@
     "@types/material-ui": "^0.21.17",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-hooks-unreliable-deps": "^1.0.0",
     "sass-loader": "^14.2.1",
     "webpack": "^5.92.1",
