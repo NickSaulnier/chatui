@@ -45,7 +45,11 @@ export function AppMenu() {
     >
       <List>
         {ROUTE_STRINGS.map((text: string, index: number) => (
-          <Link to={`${ROUTE_LINKS[index]}`} style={{ textDecoration: 'none' }}>
+          <Link
+            key={`${ROUTE_LINKS[index]}`}
+            to={`${ROUTE_LINKS[index]}`}
+            style={{ textDecoration: 'none' }}
+          >
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{getIconAsNode(index)}</ListItemIcon>
