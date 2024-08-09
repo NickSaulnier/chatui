@@ -18,7 +18,6 @@ Example UI:
 Longer Term:
 
 - Create tabbed layout with navigation bar
-- Add page for managing (viewing, continuing, naming, etc.) multiple conversations
 - Create more compelling TopBar component
 - Add support for specifying model/endpoint?
 - Customize and add features to text input/text display?

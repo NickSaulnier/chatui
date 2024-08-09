@@ -1,5 +1,6 @@
-import { Box, ListItem, ListItemAvatar, ListItemText, useTheme } from '@mui/material';
+import { Box, Button, ListItem, ListItemAvatar, ListItemText, Tooltip } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import type { Conversation } from '../context/types';
 import { formatTimestamp } from './utils';
@@ -10,16 +11,16 @@ type ConversationProps = {
 };
 
 export function Conversation({ conversation, index }: ConversationProps) {
-  const theme = useTheme();
-
   return (
     <ListItem
       sx={(theme) => ({
-        margin: `${theme.spacing(1)} 0`,
+        width: 'auto',
+        margin: `${theme.spacing(1)}`,
         border: `2px solid ${theme.palette.primary.light}`,
         borderRadius: '20px',
         '&:hover': {
           backgroundColor: theme.palette.primary.light,
+          cursor: 'pointer',
         },
       })}
       key={`conversation-${index}`}
@@ -29,8 +30,7 @@ export function Conversation({ conversation, index }: ConversationProps) {
           <ChatIcon />
         </ListItemAvatar>
         <ListItemText
-          sx={{
-            position: 'relative',
+          sx={(theme) => ({
             // Directly style the span on mobile so that a breakpoint can be
             // used for smaller fontSize styling
             '& span': {
@@ -39,27 +39,43 @@ export function Conversation({ conversation, index }: ConversationProps) {
                 fontSize: '13px',
               },
             },
-          }}
+          })}
           primaryTypographyProps={{
             color: 'text.secondary',
             fontWeight: 700,
             whiteSpace: 'nowrap',
             overflow: 'hidden',
-            textOverflow: 'clip',
+            textOverflow: 'ellipsis',
           }}
           primary={conversation.summary ?? 'Untitled'}
           secondary={formatTimestamp(conversation.messages[0].timestamp) ?? ''}
-        >
-          <Box
+        />
+        <Tooltip title="Delete">
+          <Button
             sx={{
-              position: 'absolute',
-              top: '0',
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(to right, transparent 96%, white)',
+              minWidth: '30px',
+              width: '30px',
+              height: '30px',
+              border: 'solid 1px transparent',
+              borderRadius: '16px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'transparent',
             }}
-          />
-        </ListItemText>
+            // Inline style to remove the default hover effect
+            style={{ backgroundColor: 'transparent' }}
+          >
+            <DeleteIcon
+              sx={(theme) => ({
+                color: theme.palette.text.secondary,
+                '&:hover': {
+                  color: theme.palette.primary.dark,
+                },
+              })}
+            />
+          </Button>
+        </Tooltip>
       </Box>
     </ListItem>
   );

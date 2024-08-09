@@ -20,7 +20,8 @@ export const mockConversation: Array<Conversation> = [
       chatApiEndpoint: 'fake.endpoint',
       headers: {},
     },
-    summary: 'A mock conversation.',
+    summary:
+      'A mock conversation, with a longer than average summary to test the text clipping gradient.',
   },
   {
     messages: [

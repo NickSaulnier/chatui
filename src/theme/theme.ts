@@ -1,42 +1,42 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material';
 
 import tokens from './_tokens.scss';
 
 export const customTheme = createTheme({
-    breakpoints: {
-      values: {
-        xs: Number(tokens.breakXs),
-        sm: Number(tokens.breakSm),
-        md: Number(tokens.breakMd),
-        lg: Number(tokens.breakLg),
-        xl: Number(tokens.breakXl),
-      },
+  breakpoints: {
+    values: {
+      xs: Number(tokens.breakXs),
+      sm: Number(tokens.breakSm),
+      md: Number(tokens.breakMd),
+      lg: Number(tokens.breakLg),
+      xl: Number(tokens.breakXl),
     },
-    palette: {
-      background: {
-        default: tokens.white,
-      },
-      primary: {
-        light: tokens.light,
-        dark: tokens.dark,
-        main: tokens.primary,
-      },
-      text: {
-        primary: tokens.white,
-        secondary: tokens.black,
-      },
-      grey: tokens.grey,
+  },
+  palette: {
+    background: {
+      default: tokens.white,
     },
-    shape: {
-      borderRadius: 1,
+    primary: {
+      light: tokens.light,
+      dark: tokens.dark,
+      main: tokens.primary,
+      contrastText: tokens.grey,
     },
-    spacing: [tokens.xs, tokens.sm, tokens.md, tokens.lg, tokens.xl, tokens.xxl],
-    typography: {
-      body1: {
-        fontSize: tokens.body1FontSize,
-        fontWeight: tokens.body1FontWeight,
-        fontFamily: tokens.body1FontFamily,
-        color: tokens.white,
-      },
-    }
-  });
+    text: {
+      primary: tokens.white,
+      secondary: tokens.black,
+    },
+  },
+  shape: {
+    borderRadius: 1,
+  },
+  spacing: [tokens.xs, tokens.sm, tokens.md, tokens.lg, tokens.xl, tokens.xxl],
+  typography: {
+    body1: {
+      fontSize: tokens.body1FontSize,
+      fontWeight: tokens.body1FontWeight,
+      fontFamily: tokens.body1FontFamily,
+      color: tokens.white,
+    },
+  },
+});

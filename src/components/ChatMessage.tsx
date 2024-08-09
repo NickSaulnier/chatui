@@ -10,7 +10,9 @@ export function ChatMessage({ Icon, message }: ChatMessageProps) {
   const theme = useTheme();
   const justifyContent = message.agent === Agent.User ? 'flex-end' : 'flex-start';
   const backgroundColor =
-    message.agent === Agent.User ? `${theme.palette.primary.dark}` : `${theme.palette.grey}`;
+    message.agent === Agent.User
+      ? `${theme.palette.primary.dark}`
+      : `${theme.palette.primary.contrastText}`;
 
   return (
     <Box
