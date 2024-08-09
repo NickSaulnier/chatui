@@ -1,9 +1,25 @@
-import { Box, Button, ListItem, ListItemAvatar, ListItemText, Tooltip } from '@mui/material';
+import { Box, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import type { Conversation } from '../context/types';
 import { formatTimestamp } from './utils';
+import { ConversationActionButton } from './ConversationActionButton';
+
+const ACTION_BUTTONS: {
+  tooltipTitle: string;
+  Icon: React.ElementType;
+}[] = [
+  {
+    tooltipTitle: 'Edit',
+    Icon: EditIcon,
+  },
+  {
+    tooltipTitle: 'Delete',
+    Icon: DeleteIcon,
+  },
+];
 
 type ConversationProps = {
   conversation: Conversation;
@@ -50,32 +66,13 @@ export function Conversation({ conversation, index }: ConversationProps) {
           primary={conversation.summary ?? 'Untitled'}
           secondary={formatTimestamp(conversation.messages[0].timestamp) ?? ''}
         />
-        <Tooltip title="Delete">
-          <Button
-            sx={{
-              minWidth: '30px',
-              width: '30px',
-              height: '30px',
-              border: 'solid 1px transparent',
-              borderRadius: '16px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'transparent',
-            }}
-            // Inline style to remove the default hover effect
-            style={{ backgroundColor: 'transparent' }}
-          >
-            <DeleteIcon
-              sx={(theme) => ({
-                color: theme.palette.text.secondary,
-                '&:hover': {
-                  color: theme.palette.primary.dark,
-                },
-              })}
-            />
-          </Button>
-        </Tooltip>
+        {ACTION_BUTTONS.map(({ tooltipTitle, Icon }) => (
+          <ConversationActionButton
+            key={`action-button-${tooltipTitle}`}
+            tooltipTitle={tooltipTitle}
+            Icon={Icon}
+          />
+        ))}
       </Box>
     </ListItem>
   );
