@@ -1,4 +1,4 @@
-import { Box, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import { Box, List } from '@mui/material';
 import { useContext } from 'react';
 
 import { MessageContext } from '../context/MessageContextProvider';

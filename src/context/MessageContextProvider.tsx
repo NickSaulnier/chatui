@@ -2,7 +2,9 @@ import React, { useCallback, useState } from 'react';
 import { Conversation, Message, MessageContextParams } from './types';
 
 const defaultMessageContext: MessageContextParams = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addConversation: (conversation: Conversation) => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addMessage: (message: Message) => {},
   getCurrentConversation: () => null,
   setCurrentConversation: () => {},
@@ -16,7 +18,7 @@ const MessageContextProvider = ({
   children,
   inputConversations,
 }: {
-  children: any;
+  children: any; //eslint-disable-line @typescript-eslint/no-explicit-any
   inputConversations?: Array<Conversation>;
 }) => {
   const [conversations, setConversations] = useState<Array<Conversation>>(inputConversations ?? []);

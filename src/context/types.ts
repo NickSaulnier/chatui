@@ -16,7 +16,7 @@ export type ChatConfiguration = {
   headers: Record<string, string>;
 
   // Custom properties to be sent with the request
-  properties?: Record<string, any>;
+  properties?: Record<string, any>; //eslint-disable-line @typescript-eslint/no-explicit-any
 
   // Indicates whether the user agent should send or receive cookies from the other domain
   // in the case of cross-origin requests.

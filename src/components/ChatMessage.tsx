@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import { Agent, Message } from '../context/types';
 
