@@ -8,20 +8,22 @@ Example UI:
 
 ## TODO
 
-- Change default theme
 - Create UI for creating and managing conversations
+  - Make delete and rename usable
+  - Add new button
 - Create UI to select API, OpenAI chat completion request params
+  - Add just a few minimal settings at first to get up and running
 - Create loading components/styling for waiting on response
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
 - Add githooks, lock down main branch
+- Look into adding eslint highlighting in vscode
 
 Longer Term:
 
-- Create tabbed layout with navigation bar
-- Create more compelling TopBar component
-- Add support for specifying model/endpoint?
+- Create more compelling TopBar component?
 - Customize and add features to text input/text display?
-- Look into creating a parallel React Native project
+  - Code blocks, syntax highlighting, etc.
+- Look into creating a parallel React Native project, or make a PWA
 
 ## Available Scripts
 
