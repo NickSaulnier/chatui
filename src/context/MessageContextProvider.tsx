@@ -4,6 +4,7 @@ import { Conversation, Message, MessageContextParams } from './types';
 const defaultMessageContext: MessageContextParams = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addConversation: (conversation: Conversation) => {},
+  createConversation: () => {},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addMessage: (message: Message) => {},
   getCurrentConversation: () => null,
@@ -31,10 +32,22 @@ const MessageContextProvider = ({
 
   const addConversation = useCallback(
     (newConversation: Conversation) => {
-      setConversations([...conversations, newConversation]);
+      setConversations([newConversation, ...conversations]);
     },
     [conversations, setConversations],
   );
+
+  const createConversation = useCallback(() => {
+    const newConversation = {
+      messages: [],
+      summary: 'New conversation',
+      chatConfiguration: { chatApiEndpoint: '', headers: {} },
+    };
+
+    addConversation(newConversation);
+    setCurrentConversationIndex(0);
+    setCurrentMessages([...newConversation.messages]);
+  }, [addConversation, setCurrentMessages, setCurrentConversationIndex]);
 
   const addMessage = useCallback(
     (message: Message) => {
@@ -78,6 +91,7 @@ const MessageContextProvider = ({
     <MessageContext.Provider
       value={{
         addConversation,
+        createConversation,
         addMessage,
         getCurrentConversation,
         setCurrentConversation,

@@ -31,6 +31,7 @@ export type Conversation = {
 
 export type MessageContextParams = {
   addConversation: (conversation: Conversation) => void;
+  createConversation: () => void;
   addMessage: (message: Message) => void;
   getCurrentConversation: () => Conversation | null;
   setCurrentConversation: (index: number) => void;
