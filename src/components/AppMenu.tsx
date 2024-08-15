@@ -36,39 +36,6 @@ export function AppMenu() {
     setDrawerOpen(open);
   };
 
-  const list = (
-    <Box
-      sx={{ width: '250px' }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <List>
-        {ROUTE_STRINGS.map((text: string, index: number) => (
-          <Link
-            key={`${ROUTE_LINKS[index]}`}
-            to={`${ROUTE_LINKS[index]}`}
-            style={{ textDecoration: 'none' }}
-          >
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{getIconAsNode(index)}</ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  primaryTypographyProps={{
-                    color: theme.palette.text.secondary,
-                    fontSize: '16px',
-                    fontWeight: 500,
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <React.Fragment>
       <MenuIcon
@@ -76,7 +43,36 @@ export function AppMenu() {
         onClick={toggleDrawer(true)}
       />
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-        {list}
+        <Box
+          sx={{ width: '250px' }}
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
+        >
+          <List>
+            {ROUTE_STRINGS.map((text: string, index: number) => (
+              <Link
+                key={ROUTE_LINKS[index]}
+                to={ROUTE_LINKS[index]}
+                style={{ textDecoration: 'none' }}
+              >
+                <ListItem key={text} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{getIconAsNode(index)}</ListItemIcon>
+                    <ListItemText
+                      primary={text}
+                      primaryTypographyProps={{
+                        color: theme.palette.text.secondary,
+                        fontSize: '16px',
+                        fontWeight: 500,
+                      }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            ))}
+          </List>
+        </Box>
       </Drawer>
     </React.Fragment>
   );
