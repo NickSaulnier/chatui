@@ -11,7 +11,7 @@ export function ConversationItem({ children, clickHandler }: ConversationItemPro
     <ListItem
       sx={(theme) => ({
         width: 'auto',
-        margin: `${theme.spacing(1)}`,
+        margin: theme.spacing(1),
         border: `2px solid ${theme.palette.primary.light}`,
         borderRadius: '20px',
         '&:hover': {

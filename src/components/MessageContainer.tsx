@@ -36,7 +36,7 @@ export function MessageContainer() {
         sx={(theme) => ({
           height: '100%',
           width: '100%',
-          margin: `${theme.spacing(2)}`,
+          margin: theme.spacing(2),
         })}
       >
         {currentMessages?.map((message) => (

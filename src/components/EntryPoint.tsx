@@ -19,9 +19,9 @@ export function EntryPoint() {
           <Router>
             <TopBar />
             <Routes>
-              <Route path={`${ROUTE_LINKS[0]}`} element={<ChatContainer />} />
-              <Route path={`${ROUTE_LINKS[1]}`} element={<ConversationsContainer />} />
-              <Route path={`${ROUTE_LINKS[2]}`} element={<OpenAISettings />} />
+              <Route path={ROUTE_LINKS[0]} element={<ChatContainer />} />
+              <Route path={ROUTE_LINKS[1]} element={<ConversationsContainer />} />
+              <Route path={ROUTE_LINKS[2]} element={<OpenAISettings />} />
             </Routes>
           </Router>
         </MessageContextProvider>

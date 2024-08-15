@@ -10,7 +10,6 @@ Example UI:
 
 - Create UI for creating and managing conversations
   - Make delete and rename usable
-  - Add new button
 - Create UI to select API, OpenAI chat completion request params
   - Add just a few minimal settings at first to get up and running
 - Create loading components/styling for waiting on response
