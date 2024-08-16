@@ -38,5 +38,9 @@ export const customTheme = createTheme({
       fontFamily: tokens.body1FontFamily,
       color: tokens.white,
     },
+    subtitle1: {
+      fontFamily: tokens.body1FontFamily,
+      fontWeight: tokens.body1FontWeight,
+    },
   },
 });

@@ -21,7 +21,6 @@ const getIconAsNode = (index: number) => {
 
 export function AppMenu() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-
   const theme = useTheme();
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
