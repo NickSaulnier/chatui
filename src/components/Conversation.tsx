@@ -50,7 +50,11 @@ export function Conversation({ conversation }: ConversationProps) {
           textOverflow: 'ellipsis',
         }}
         primary={conversation.summary ?? 'Untitled'}
-        secondary={formatTimestamp(conversation.messages[0].timestamp) ?? ''}
+        secondary={
+          conversation?.messages[0]?.timestamp
+            ? formatTimestamp(conversation?.messages[0]?.timestamp)
+            : ''
+        }
       />
       {ACTION_BUTTONS.map(({ tooltipTitle, Icon }) => (
         <ConversationActionButton

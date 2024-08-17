@@ -15,5 +15,5 @@ const monthIndexToMonth = [
 
 export function formatTimestamp(timestamp: number): string {
   const date = new Date(timestamp);
-  return `${monthIndexToMonth[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()}`;
+  return `${monthIndexToMonth[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
