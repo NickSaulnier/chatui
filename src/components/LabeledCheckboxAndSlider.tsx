@@ -8,6 +8,7 @@ type LabeledCheckboxAndSliderProps = {
   max: number;
   step: number;
   defaultValue: number;
+  disableByDefault: boolean;
 };
 
 export function LabeledCheckboxAndSlider({
@@ -16,8 +17,9 @@ export function LabeledCheckboxAndSlider({
   max,
   step,
   defaultValue,
+  disableByDefault,
 }: LabeledCheckboxAndSliderProps) {
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(disableByDefault);
   const theme = useTheme();
 
   return (
