@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { LabeledCheckboxAndSlider } from './LabeledCheckboxAndSlider';
+import { LabeledTextInput } from './LabeledTextInput';
 
 export function OpenAISettings() {
   return (
@@ -14,6 +15,8 @@ export function OpenAISettings() {
         overflow: 'hidden',
       }}
     >
+      <LabeledTextInput label="URL" defaultValue="http://localhost:11434/v1" />
+      <LabeledTextInput label="Model" defaultValue="" />
       <LabeledCheckboxAndSlider
         label="Temperature"
         onChange={() => {}}
