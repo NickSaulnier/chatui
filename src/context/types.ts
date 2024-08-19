@@ -38,3 +38,16 @@ export type MessageContextParams = {
   currentMessages: Array<Message>;
   conversations: Array<Conversation>;
 };
+
+export type SettingsContextParams = {
+  baseURL: string;
+  model: string;
+  max_tokens?: number;
+  temperature?: number;
+  top_p?: number;
+  setBaseURL: (url: string) => void;
+  setModel: (model: string) => void;
+  setMaxTokens: (tokens: number) => void;
+  setTemperature: (temperature: number) => void;
+  setTopP: (topP: number) => void;
+};

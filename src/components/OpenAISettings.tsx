@@ -1,8 +1,23 @@
 import { Box } from '@mui/material';
 import { LabeledCheckboxAndSlider } from './LabeledCheckboxAndSlider';
 import { LabeledTextInput } from './LabeledTextInput';
+import { SettingsContext } from '../context/SettingsContextProvider';
+import { useContext } from 'react';
 
 export function OpenAISettings() {
+  const {
+    baseURL,
+    model,
+    max_tokens,
+    temperature,
+    top_p,
+    setBaseURL,
+    setModel,
+    setMaxTokens,
+    setTemperature,
+    setTopP,
+  } = useContext(SettingsContext);
+
   return (
     <Box
       sx={{
@@ -15,26 +30,41 @@ export function OpenAISettings() {
         overflow: 'hidden',
       }}
     >
-      <LabeledTextInput label="URL" defaultValue="http://localhost:11434/v1" />
-      <LabeledTextInput label="Model" defaultValue="" />
-      <LabeledTextInput label="Max Tokens" defaultValue={2448} type="number" />
+      <LabeledTextInput
+        label="URL"
+        value={baseURL}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setBaseURL(event.target.value)}
+      />
+      <LabeledTextInput
+        label="Model"
+        value={model}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setModel(event.target.value)}
+      />
+      <LabeledTextInput
+        label="Max Tokens"
+        value={max_tokens}
+        type="number"
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          setMaxTokens(Number(event.target.value))
+        }
+      />
       <LabeledCheckboxAndSlider
         label="Temperature"
-        onChange={() => {}}
-        min={0.1}
+        onChange={(event, value) => setTemperature(value as number)}
+        min={0}
         max={1.0}
         step={0.1}
+        value={temperature}
         defaultValue={0.7}
-        disableByDefault={false}
       />
       <LabeledCheckboxAndSlider
         label="Top P"
-        onChange={() => {}}
-        min={0.1}
+        onChange={(event, value) => setTopP(value as number)}
+        min={0}
         max={1.0}
         step={0.1}
+        value={top_p}
         defaultValue={0.7}
-        disableByDefault={true}
       />
     </Box>
   );

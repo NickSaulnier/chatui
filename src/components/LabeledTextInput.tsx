@@ -2,11 +2,12 @@ import { Box, TextField, Typography } from '@mui/material';
 
 type LabeledTextInputProps = {
   label: string;
-  defaultValue: string | number;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
   type?: string;
 };
 
-export function LabeledTextInput({ label, defaultValue, type }: LabeledTextInputProps) {
+export function LabeledTextInput({ label, onChange, type, value }: LabeledTextInputProps) {
   return (
     <Box
       sx={(theme) => ({
@@ -29,7 +30,8 @@ export function LabeledTextInput({ label, defaultValue, type }: LabeledTextInput
       </Box>
       <TextField
         hiddenLabel
-        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
         type={type}
         sx={(theme) => ({
           width: '80%',

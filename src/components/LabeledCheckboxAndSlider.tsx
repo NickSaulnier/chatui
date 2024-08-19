@@ -3,23 +3,24 @@ import { useState } from 'react';
 
 type LabeledCheckboxAndSliderProps = {
   label: string;
-  onChange: (value: number) => void;
+  onChange: (event: Event, value: number | number[]) => void;
   min: number;
   max: number;
   step: number;
-  defaultValue: number;
-  disableByDefault: boolean;
+  defaultValue?: number;
+  value?: number;
 };
 
 export function LabeledCheckboxAndSlider({
   label,
+  onChange,
   min,
   max,
   step,
+  value,
   defaultValue,
-  disableByDefault,
 }: LabeledCheckboxAndSliderProps) {
-  const [disabled, setDisabled] = useState(disableByDefault);
+  const [disabled, setDisabled] = useState(value === undefined);
   const theme = useTheme();
 
   return (
@@ -52,6 +53,7 @@ export function LabeledCheckboxAndSlider({
         />
         <Slider
           aria-label={label}
+          value={value}
           defaultValue={defaultValue}
           valueLabelDisplay="auto"
           step={step}
@@ -60,6 +62,7 @@ export function LabeledCheckboxAndSlider({
           max={max}
           getAriaValueText={(value) => `${value}`}
           disabled={disabled}
+          onChange={onChange}
           sx={(theme) => ({
             width: '100%',
             margin: theme.spacing(1),

@@ -19,7 +19,7 @@ const MessageContextProvider = ({
   children,
   inputConversations,
 }: {
-  children: any; //eslint-disable-line @typescript-eslint/no-explicit-any
+  children: React.ReactNode;
   inputConversations?: Array<Conversation>;
 }) => {
   const [conversations, setConversations] = useState<Array<Conversation>>(inputConversations ?? []);
