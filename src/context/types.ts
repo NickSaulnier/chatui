@@ -42,11 +42,13 @@ export type MessageContextParams = {
 export type SettingsContextParams = {
   baseURL: string;
   model: string;
+  apiKey: string;
   max_tokens?: number;
   temperature?: number;
   top_p?: number;
   setBaseURL: (url: string) => void;
   setModel: (model: string) => void;
+  setApiKey: (apiKey: string) => void;
   setMaxTokens: (tokens: number) => void;
   setTemperature: (temperature: number) => void;
   setTopP: (topP: number) => void;

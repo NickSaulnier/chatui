@@ -8,11 +8,13 @@ export function OpenAISettings() {
   const {
     baseURL,
     model,
+    apiKey,
     max_tokens,
     temperature,
     top_p,
     setBaseURL,
     setModel,
+    setApiKey,
     setMaxTokens,
     setTemperature,
     setTopP,
@@ -39,6 +41,11 @@ export function OpenAISettings() {
         label="Model"
         value={model}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setModel(event.target.value)}
+      />
+      <LabeledTextInput
+        label="API Key"
+        value={apiKey}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setApiKey(event.target.value)}
       />
       <LabeledTextInput
         label="Max Tokens"

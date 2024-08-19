@@ -1,31 +1,44 @@
 import { Box, TextField } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
 import { InputButton } from './InputButton';
 import { INPUT_BORDER_RADIUS, MIN_INPUT_HEIGHT } from './constants';
 import { MessageContext } from '../context/MessageContextProvider';
 import { Agent } from '../context/types';
 import { fetchOpenAICompletion } from '../requests/OpenAi';
+import { SettingsContext } from '../context/SettingsContextProvider';
 
 export function TextInput() {
   const [textInput, setTextInput] = useState('');
 
   const { addMessage } = useContext(MessageContext);
+  const { baseURL, model, apiKey, max_tokens, temperature, top_p } = useContext(SettingsContext);
 
-  const handleInputEnter = async () => {
+  const handleInputEnter = useCallback(async () => {
     addMessage({ agent: Agent.User, timestamp: Date.now(), content: textInput });
-    // TODO: Add state and UI to select model, server URL, model params, etc.
-    //
-    const completion = fetchOpenAICompletion({
+
+    fetchOpenAICompletion({
       prompt: textInput,
-      baseURL: 'http://localhost:11434/v1',
-      apiKey: 'ollama',
-      model: 'llama3',
+      baseURL,
+      apiKey,
+      model,
       messages: [],
+      max_tokens,
+      temperature,
+      top_p,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }).then((completion: any) => {
+      if (completion?.choices[0].message.content) {
+        addMessage({
+          agent: Agent.Bot,
+          timestamp: Date.now(),
+          content: completion.choices[0].message.content,
+        });
+      }
     });
-    console.log(completion);
+
     setTextInput('');
-  };
+  }, [addMessage, apiKey, baseURL, max_tokens, model, temperature, textInput, top_p]);
 
   return (
     <Box
