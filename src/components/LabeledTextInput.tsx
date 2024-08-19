@@ -2,10 +2,11 @@ import { Box, TextField, Typography } from '@mui/material';
 
 type LabeledTextInputProps = {
   label: string;
-  defaultValue: string;
+  defaultValue: string | number;
+  type?: string;
 };
 
-export function LabeledTextInput({ label, defaultValue }: LabeledTextInputProps) {
+export function LabeledTextInput({ label, defaultValue, type }: LabeledTextInputProps) {
   return (
     <Box
       sx={(theme) => ({
@@ -29,6 +30,7 @@ export function LabeledTextInput({ label, defaultValue }: LabeledTextInputProps)
       <TextField
         hiddenLabel
         defaultValue={defaultValue}
+        type={type}
         sx={(theme) => ({
           width: '80%',
           input: { color: theme.palette.text.secondary, fontSize: '15px' },

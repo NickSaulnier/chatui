@@ -17,6 +17,7 @@ export function OpenAISettings() {
     >
       <LabeledTextInput label="URL" defaultValue="http://localhost:11434/v1" />
       <LabeledTextInput label="Model" defaultValue="" />
+      <LabeledTextInput label="Max Tokens" defaultValue={2448} type="number" />
       <LabeledCheckboxAndSlider
         label="Temperature"
         onChange={() => {}}
