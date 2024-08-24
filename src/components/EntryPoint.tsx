@@ -11,6 +11,7 @@ import { ConversationsContainer } from './ConversationsContainer';
 import { OpenAISettings } from './OpenAISettings';
 import { ROUTE_LINKS } from './constants';
 import SettingsContextProvider from '../context/SettingsContextProvider';
+import { Authenticate } from './Authenticate';
 
 export function EntryPoint() {
   return (
@@ -24,6 +25,7 @@ export function EntryPoint() {
                 <Route path={ROUTE_LINKS[0]} element={<ChatContainer />} />
                 <Route path={ROUTE_LINKS[1]} element={<ConversationsContainer />} />
                 <Route path={ROUTE_LINKS[2]} element={<OpenAISettings />} />
+                <Route path={ROUTE_LINKS[3]} element={<Authenticate />} />
               </Routes>
             </Router>
           </SettingsContextProvider>

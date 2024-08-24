@@ -5,9 +5,10 @@ type LabeledTextInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | number;
   type?: string;
+  error?: boolean;
 };
 
-export function LabeledTextInput({ label, onChange, type, value }: LabeledTextInputProps) {
+export function LabeledTextInput({ label, onChange, type, value, error }: LabeledTextInputProps) {
   return (
     <Box
       sx={(theme) => ({
@@ -33,9 +34,13 @@ export function LabeledTextInput({ label, onChange, type, value }: LabeledTextIn
         value={value}
         onChange={onChange}
         type={type}
+        error={error}
         sx={(theme) => ({
           width: '80%',
           input: { color: theme.palette.text.secondary, fontSize: '15px' },
+          '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.palette.primary.dark,
+          },
         })}
       />
     </Box>

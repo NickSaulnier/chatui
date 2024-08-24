@@ -53,3 +53,8 @@ export type SettingsContextParams = {
   setTemperature: (temperature: number) => void;
   setTopP: (topP: number) => void;
 };
+
+export type AuthenticationContextParams = {
+  currentUser?: string;
+  setCurrentUser: (user: string) => void;
+};
