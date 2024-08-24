@@ -15,11 +15,9 @@ Example UI:
 - Create loading components/styling for waiting on response
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
 - Add githooks, lock down main branch
-- Look into adding eslint highlighting in vscode
 
 Longer Term:
 
-- Create more compelling TopBar component?
 - Customize and add features to text input/text display?
   - Code blocks, syntax highlighting, etc.
 - Look into creating a parallel React Native project, or make a PWA
