@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { SettingsContextParams } from './types';
+import { createContext, useState } from 'react';
+import type { ReactNode } from 'react';
+
+import type { SettingsContextParams } from './types';
 
 const defaultSettingsContext: SettingsContextParams = {
   baseURL: 'http://localhost:11434/v1',
@@ -22,9 +24,9 @@ const defaultSettingsContext: SettingsContextParams = {
   setTopP: (topP: number) => {},
 };
 
-export const SettingsContext = React.createContext(defaultSettingsContext);
+export const SettingsContext = createContext(defaultSettingsContext);
 
-const SettingsContextProvider = ({ children }: { children: React.ReactNode }) => {
+const SettingsContextProvider = ({ children }: { children: ReactNode }) => {
   const [baseURL, setBaseURL] = useState(defaultSettingsContext.baseURL);
   const [model, setModel] = useState(defaultSettingsContext.model);
   const [apiKey, setApiKey] = useState(defaultSettingsContext.apiKey);

@@ -1,4 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
+import type { ReactNode } from 'react';
+
 import { Conversation, Message, MessageContextParams } from './types';
 
 const defaultMessageContext: MessageContextParams = {
@@ -13,13 +15,13 @@ const defaultMessageContext: MessageContextParams = {
   conversations: [],
 };
 
-export const MessageContext = React.createContext(defaultMessageContext);
+export const MessageContext = createContext(defaultMessageContext);
 
 const MessageContextProvider = ({
   children,
   inputConversations,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   inputConversations?: Array<Conversation>;
 }) => {
   const [conversations, setConversations] = useState<Array<Conversation>>(inputConversations ?? []);
