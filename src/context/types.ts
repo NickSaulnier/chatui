@@ -55,6 +55,6 @@ export type SettingsContextParams = {
 };
 
 export type AuthenticationContextParams = {
-  currentUser?: string;
-  setCurrentUser: (user: string) => void;
+  currentUser: string | null;
+  createUser: (email: string, password: string) => void;
 };

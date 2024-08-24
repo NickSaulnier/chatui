@@ -1,12 +1,14 @@
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
+import { firebaseApp } from '../database/firebaseConfig';
 import type { AuthenticationContextParams } from './types';
 
 const defaultAuthenticationContext: AuthenticationContextParams = {
-  currentUser: undefined,
+  currentUser: null,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setCurrentUser: (user: string) => {},
+  createUser: (email: string, password: string) => {},
 };
 
 export const AuthenticationContext = createContext(defaultAuthenticationContext);
@@ -14,8 +16,17 @@ export const AuthenticationContext = createContext(defaultAuthenticationContext)
 const AuthenticationContextProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState(defaultAuthenticationContext.currentUser);
 
+  const createUser = useCallback(
+    async (email: string, password: string) => {
+      const auth = getAuth(firebaseApp);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      setCurrentUser(userCredential.user.displayName);
+    },
+    [setCurrentUser],
+  );
+
   return (
-    <AuthenticationContext.Provider value={{ currentUser, setCurrentUser }}>
+    <AuthenticationContext.Provider value={{ currentUser, createUser }}>
       {children}
     </AuthenticationContext.Provider>
   );
