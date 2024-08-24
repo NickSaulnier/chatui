@@ -1,3 +1,5 @@
+import type { UserCredential } from 'firebase/auth';
+
 export enum Agent {
   User = 'user',
   Bot = 'bot',
@@ -55,6 +57,6 @@ export type SettingsContextParams = {
 };
 
 export type AuthenticationContextParams = {
-  currentUser: string | null;
+  currentUser: UserCredential | null;
   createUser: (email: string, password: string) => void;
 };

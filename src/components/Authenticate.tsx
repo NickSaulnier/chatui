@@ -1,7 +1,8 @@
 import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { LabeledTextInput } from './LabeledTextInput';
+import { AuthenticationContext } from '../context/AuthenticationContextProvider';
 
 const EMAIL_REGEX =
   // eslint-disable-next-line no-useless-escape
@@ -14,6 +15,8 @@ export function Authenticate() {
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+
+  const { createUser } = useContext(AuthenticationContext);
 
   return (
     <Box
@@ -72,7 +75,12 @@ export function Authenticate() {
           <LabeledTextInput
             label="Email Address"
             value={email}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+            error={!emailValid}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const emailValue = event.target.value;
+              setEmail(emailValue);
+              setEmailValid(EMAIL_REGEX.test(emailValue));
+            }}
           />
           <LabeledTextInput
             label="Password"
@@ -84,6 +92,7 @@ export function Authenticate() {
           <LabeledTextInput
             label="Verify Password"
             value={verifyPassword}
+            error={!passwordsMatch && verifyPassword !== ''}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const verifyPasswordValue = event.target.value;
               setVerifyPassword(verifyPasswordValue);
@@ -94,6 +103,7 @@ export function Authenticate() {
             variant="contained"
             sx={(theme) => ({ margin: theme.spacing(2), color: theme.palette.text.primary })}
             disabled={!emailValid || !passwordsMatch || !password || !verifyPassword || !email}
+            onClick={() => createUser(email, password)}
           >
             Submit
           </Button>

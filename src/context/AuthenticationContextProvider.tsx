@@ -20,7 +20,7 @@ const AuthenticationContextProvider = ({ children }: { children: ReactNode }) =>
     async (email: string, password: string) => {
       const auth = getAuth(firebaseApp);
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      setCurrentUser(userCredential.user.displayName);
+      setCurrentUser(userCredential);
     },
     [setCurrentUser],
   );
