@@ -1,7 +1,7 @@
 import { createContext, useCallback, useState } from 'react';
 import type { ReactNode } from 'react';
 
-import { Conversation, Message, MessageContextParams } from './types';
+import type { Conversation, Message, MessageContextParams } from './types';
 
 const defaultMessageContext: MessageContextParams = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
