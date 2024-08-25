@@ -1,5 +1,5 @@
-import { Box, Button } from '@mui/material';
-import { useContext, useState } from 'react';
+import { Box, Button, Snackbar } from '@mui/material';
+import { useCallback, useContext, useState } from 'react';
 
 import { LabeledTextInput } from './LabeledTextInput';
 import { AuthenticationContext } from '../context/AuthenticationContextProvider';
@@ -15,8 +15,27 @@ export function Authenticate() {
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const { createUser } = useContext(AuthenticationContext);
+
+  const onCreateUser = useCallback(async () => {
+    try {
+      await createUser(email, password);
+      setSnackbarMessage('User created successfully');
+      setSnackbarOpen(true);
+    } catch (error) {
+      setSnackbarMessage('Error creating user');
+      setSnackbarOpen(true);
+      console.error(error);
+    }
+  }, [createUser, email, password]);
+
+  const onSnackbarClose = useCallback(() => {
+    setSnackbarOpen(false);
+    setSnackbarMessage('');
+  }, [setSnackbarOpen, setSnackbarMessage]);
 
   return (
     <Box
@@ -103,7 +122,7 @@ export function Authenticate() {
             variant="contained"
             sx={(theme) => ({ margin: theme.spacing(2), color: theme.palette.text.primary })}
             disabled={!emailValid || !passwordsMatch || !password || !verifyPassword || !email}
-            onClick={() => createUser(email, password)}
+            onClick={onCreateUser}
           >
             Submit
           </Button>
@@ -123,6 +142,20 @@ export function Authenticate() {
           </Button>
         </>
       )}
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        message={snackbarMessage}
+        autoHideDuration={3500}
+        onClose={onSnackbarClose}
+        open={snackbarOpen}
+        ContentProps={{
+          sx: {
+            display: 'block',
+            textAlign: 'center',
+            fontSize: '15px',
+          },
+        }}
+      />
     </Box>
   );
 }
