@@ -21,6 +21,7 @@ Example UI:
   - Add just a few minimal settings at first to get up and running
 - Create loading components/styling for waiting on response
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
+  - Move all context calls out of hooks I want to make generic and convert to props
 - Add githooks, lock down main branch
 
 Longer Term:
