@@ -9,12 +9,8 @@ Example UI:
 ## TODO
 
 - Finish Authentication
-  - Finish styling authenticate text inputs
-  - Add divider to app menu
   - Add login status to topbar (and maybe auth menu)
-  - Hide password
-  - Find tool to validate password complexity
-  - Add snackbar for login/creation success, reroute to current conversation
+  - Add snackbar for login success, reroute to current conversation on login/creation
 - Create UI for creating and managing conversations
   - Make delete and rename usable (requires db)
 - Create UI to select API, OpenAI chat completion request params
