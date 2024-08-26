@@ -66,6 +66,7 @@ export function Authenticate() {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(event.target.value)
             }
+            type="password"
           />
           <Button
             variant="contained"
@@ -107,6 +108,7 @@ export function Authenticate() {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setPassword(event.target.value)
             }
+            type="password"
           />
           <LabeledTextInput
             label="Verify Password"
@@ -117,6 +119,7 @@ export function Authenticate() {
               setVerifyPassword(verifyPasswordValue);
               setPasswordsMatch(verifyPasswordValue === password);
             }}
+            type="password"
           />
           <Button
             variant="contained"
