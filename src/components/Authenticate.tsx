@@ -8,11 +8,15 @@ const EMAIL_REGEX =
   // eslint-disable-next-line no-useless-escape
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
+const PASSWORD_COMPLEXITY_REGEX =
+  /^(?:(?=.*[a-z])(?:(?=.*[A-Z])(?=.*[\d\W])|(?=.*\W)(?=.*\d))|(?=.*\W)(?=.*[A-Z])(?=.*\d)).{8,}$/i;
+
 export function Authenticate() {
   const [loginView, setLoginView] = useState(true);
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(true);
   const [password, setPassword] = useState('');
+  const [passwordValid, setPasswordValid] = useState(true);
   const [verifyPassword, setVerifyPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -37,6 +41,25 @@ export function Authenticate() {
     setSnackbarMessage('');
   }, [setSnackbarOpen, setSnackbarMessage]);
 
+  const onViewChange = useCallback(() => {
+    setEmail('');
+    setPassword('');
+    setVerifyPassword('');
+    setEmailValid(true);
+    setPasswordsMatch(true);
+    setPasswordValid(true);
+    setLoginView(!loginView);
+  }, [
+    loginView,
+    setEmail,
+    setPassword,
+    setVerifyPassword,
+    setEmailValid,
+    setPasswordsMatch,
+    setPasswordValid,
+    setLoginView,
+  ]);
+
   return (
     <Box
       sx={{
@@ -48,103 +71,63 @@ export function Authenticate() {
         alignItems: 'center',
       }}
     >
-      {loginView ? (
-        <>
-          <LabeledTextInput
-            label="Email Address"
-            value={email}
-            error={!emailValid}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const emailValue = event.target.value;
-              setEmail(emailValue);
-              setEmailValid(EMAIL_REGEX.test(emailValue));
-            }}
-          />
-          <LabeledTextInput
-            label="Password"
-            value={password}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(event.target.value)
-            }
-            type="password"
-          />
-          <Button
-            variant="contained"
-            sx={(theme) => ({ margin: theme.spacing(2), color: theme.palette.text.primary })}
-            disabled={!emailValid || !password || !email}
-          >
-            Login
-          </Button>
-          <Button
-            variant="text"
-            sx={(theme) => ({
-              '&:hover': { color: theme.palette.primary.dark, backgroundColor: 'transparent' },
-            })}
-            onClick={() => {
-              setEmail('');
-              setPassword('');
-              setVerifyPassword('');
-              setLoginView(false);
-            }}
-          >
-            No Account? Sign Up.
-          </Button>
-        </>
-      ) : (
-        <>
-          <LabeledTextInput
-            label="Email Address"
-            value={email}
-            error={!emailValid}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const emailValue = event.target.value;
-              setEmail(emailValue);
-              setEmailValid(EMAIL_REGEX.test(emailValue));
-            }}
-          />
-          <LabeledTextInput
-            label="Password"
-            value={password}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(event.target.value)
-            }
-            type="password"
-          />
-          <LabeledTextInput
-            label="Verify Password"
-            value={verifyPassword}
-            error={!passwordsMatch && verifyPassword !== ''}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const verifyPasswordValue = event.target.value;
-              setVerifyPassword(verifyPasswordValue);
-              setPasswordsMatch(verifyPasswordValue === password);
-            }}
-            type="password"
-          />
-          <Button
-            variant="contained"
-            sx={(theme) => ({ margin: theme.spacing(2), color: theme.palette.text.primary })}
-            disabled={!emailValid || !passwordsMatch || !password || !verifyPassword || !email}
-            onClick={onCreateUser}
-          >
-            Submit
-          </Button>
-          <Button
-            variant="text"
-            sx={(theme) => ({
-              '&:hover': { color: theme.palette.primary.dark, backgroundColor: 'transparent' },
-            })}
-            onClick={() => {
-              setEmail('');
-              setPassword('');
-              setVerifyPassword('');
-              setLoginView(true);
-            }}
-          >
-            Already have an account? Login.
-          </Button>
-        </>
+      <LabeledTextInput
+        label="Email Address"
+        value={email}
+        error={!emailValid}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          const emailValue = event.target.value;
+          setEmail(emailValue);
+          setEmailValid(EMAIL_REGEX.test(emailValue));
+        }}
+      />
+      <LabeledTextInput
+        label="Password"
+        value={password}
+        error={!passwordValid}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          const passwordValue = event.target.value;
+          setPassword(passwordValue);
+          if (!loginView) {
+            setPasswordValid(PASSWORD_COMPLEXITY_REGEX.test(passwordValue));
+          }
+        }}
+        type="password"
+      />
+      {!loginView && (
+        <LabeledTextInput
+          label="Verify Password"
+          value={verifyPassword}
+          error={!passwordsMatch && verifyPassword !== ''}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            const verifyPasswordValue = event.target.value;
+            setVerifyPassword(verifyPasswordValue);
+            setPasswordsMatch(verifyPasswordValue === password);
+          }}
+          type="password"
+        />
       )}
+      <Button
+        variant="contained"
+        sx={(theme) => ({ margin: theme.spacing(2), color: theme.palette.text.primary })}
+        disabled={
+          loginView
+            ? !emailValid || !password || !email
+            : !emailValid || !passwordsMatch || !password || !verifyPassword || !email
+        }
+        onClick={loginView ? () => {} : () => onCreateUser()}
+      >
+        {loginView ? 'Login' : 'Submit'}
+      </Button>
+      <Button
+        variant="text"
+        sx={(theme) => ({
+          '&:hover': { color: theme.palette.primary.dark, backgroundColor: 'transparent' },
+        })}
+        onClick={onViewChange}
+      >
+        {loginView ? 'No Account? Sign Up.' : 'Already have an account? Login.'}
+      </Button>
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         message={snackbarMessage}
