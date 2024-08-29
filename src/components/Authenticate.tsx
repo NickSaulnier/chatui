@@ -1,5 +1,6 @@
 import { Box, Button, Snackbar } from '@mui/material';
 import { useCallback, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { LabeledTextInput } from './LabeledTextInput';
 import { AuthenticationContext } from '../context/AuthenticationContextProvider';
@@ -22,19 +23,35 @@ export function Authenticate() {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  const { createUser } = useContext(AuthenticationContext);
+  const { createUser, login } = useContext(AuthenticationContext);
+  const navigate = useNavigate();
 
-  const onCreateUser = useCallback(async () => {
+  const onAuthenticate = useCallback(async () => {
     try {
-      await createUser(email, password);
-      setSnackbarMessage('User created successfully');
+      if (loginView) {
+        await login(email, password);
+      } else {
+        await createUser(email, password);
+      }
+
+      setSnackbarMessage(loginView ? 'Logged in successfully' : 'User created successfully');
       setSnackbarOpen(true);
+      navigate('/');
     } catch (error) {
-      setSnackbarMessage('Error creating user');
+      setSnackbarMessage(`${error}`);
       setSnackbarOpen(true);
       console.error(error);
     }
-  }, [createUser, email, password]);
+  }, [
+    loginView,
+    navigate,
+    login,
+    email,
+    password,
+    createUser,
+    setSnackbarMessage,
+    setSnackbarOpen,
+  ]);
 
   const onSnackbarClose = useCallback(() => {
     setSnackbarOpen(false);
@@ -115,7 +132,7 @@ export function Authenticate() {
             ? !emailValid || !password || !email
             : !emailValid || !passwordsMatch || !password || !verifyPassword || !email
         }
-        onClick={loginView ? () => {} : () => onCreateUser()}
+        onClick={onAuthenticate}
       >
         {loginView ? 'Login' : 'Submit'}
       </Button>
