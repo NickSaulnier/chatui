@@ -1,10 +1,10 @@
-import { Box, Button, IconButton } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Box, Button } from '@mui/material';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppMenu } from './AppMenu';
 import { AuthenticationContext } from '../context/AuthenticationContextProvider';
+import { LoggedInMenu } from './LoggedInMenu';
 
 export function TopBar() {
   const { currentUser } = useContext(AuthenticationContext);
@@ -34,12 +34,7 @@ export function TopBar() {
         })}
       >
         {currentUser ? (
-          <IconButton>
-            <AccountCircleIcon
-              fontSize="large"
-              sx={(theme) => ({ color: theme.palette.text.primary })}
-            />
-          </IconButton>
+          <LoggedInMenu />
         ) : (
           <Button
             variant="text"
