@@ -11,12 +11,13 @@ Example UI:
 - Create UI for creating and managing conversations
   - Remove mock data
   - Make delete and rename usable (requires db)
-- Create UI to select API, OpenAI chat completion request params
-  - Add just a few minimal settings at first to get up and running
 - Create loading components/styling for waiting on response
+  - Switch to using streams when requesting completion
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
   - Move all context calls out of hooks I want to make generic and convert to props
 - Add githooks, lock down main branch
+- Add documentation where it is needed
+- Add some jest tests
 
 Longer Term:
 
