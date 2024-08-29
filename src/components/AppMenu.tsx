@@ -1,27 +1,41 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   Box,
+  Divider,
   Drawer,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  SvgIconTypeMap,
   useTheme,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTE_ICONS, ROUTE_LINKS, ROUTE_STRINGS } from './constants';
+import {
+  LOGIN_ROUTE_ICONS,
+  LOGIN_ROUTE_LINKS,
+  LOGIN_ROUTE_STRINGS,
+  ROUTE_ICONS,
+  ROUTE_LINKS,
+  ROUTE_STRINGS,
+} from './constants';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { AuthenticationContext } from '../context/AuthenticationContextProvider';
 
-const getIconAsNode = (index: number) => {
-  const Icon = ROUTE_ICONS[index];
-
+const getStyledIcon = (
+  Icon: OverridableComponent<SvgIconTypeMap<object, 'svg'>> & {
+    muiName: string;
+  },
+) => {
   return <Icon sx={{ color: 'primary.dark' }} />;
 };
 
 export function AppMenu() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
+  const { currentUser } = useContext(AuthenticationContext);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -33,6 +47,26 @@ export function AppMenu() {
     }
 
     setDrawerOpen(open);
+  };
+
+  const renderRoute = (text: string, link: string, Icon: JSX.Element) => {
+    return (
+      <Link key={link} to={link} style={{ textDecoration: 'none' }}>
+        <ListItem key={text} disablePadding>
+          <ListItemButton>
+            <ListItemIcon>{Icon}</ListItemIcon>
+            <ListItemText
+              primary={text}
+              primaryTypographyProps={{
+                color: theme.palette.text.secondary,
+                fontSize: '16px',
+                fontWeight: 500,
+              }}
+            />
+          </ListItemButton>
+        </ListItem>
+      </Link>
+    );
   };
 
   return (
@@ -49,27 +83,19 @@ export function AppMenu() {
           onKeyDown={toggleDrawer(false)}
         >
           <List>
-            {ROUTE_STRINGS.map((text: string, index: number) => (
-              <Link
-                key={ROUTE_LINKS[index]}
-                to={ROUTE_LINKS[index]}
-                style={{ textDecoration: 'none' }}
-              >
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>{getIconAsNode(index)}</ListItemIcon>
-                    <ListItemText
-                      primary={text}
-                      primaryTypographyProps={{
-                        color: theme.palette.text.secondary,
-                        fontSize: '16px',
-                        fontWeight: 500,
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
-            ))}
+            {ROUTE_STRINGS.map((text: string, index: number) =>
+              renderRoute(text, ROUTE_LINKS[index], getStyledIcon(ROUTE_ICONS[index])),
+            )}
+            {/* Only render login route if the user is not logged in */}
+            {!currentUser && <Divider />}
+            {!currentUser &&
+              LOGIN_ROUTE_STRINGS.map((text: string, index: number) =>
+                renderRoute(
+                  text,
+                  LOGIN_ROUTE_LINKS[index],
+                  getStyledIcon(LOGIN_ROUTE_ICONS[index]),
+                ),
+              )}
           </List>
         </Box>
       </Drawer>
