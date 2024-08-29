@@ -8,10 +8,8 @@ Example UI:
 
 ## TODO
 
-- Finish Authentication
-  - Add login status to topbar (and maybe auth menu)
-  - Add snackbar for login success, reroute to current conversation on login/creation
 - Create UI for creating and managing conversations
+  - Remove mock data
   - Make delete and rename usable (requires db)
 - Create UI to select API, OpenAI chat completion request params
   - Add just a few minimal settings at first to get up and running
