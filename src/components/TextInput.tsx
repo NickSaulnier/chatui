@@ -1,5 +1,5 @@
 import { Box, TextField } from '@mui/material';
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { InputButton } from './InputButton';
 import { INPUT_BORDER_RADIUS, MIN_INPUT_HEIGHT } from './constants';
@@ -10,13 +10,12 @@ import { SettingsContext } from '../context/SettingsContextProvider';
 
 export function TextInput() {
   const [textInput, setTextInput] = useState('');
+  const [sendRequest, setSendRequest] = useState(false);
 
   const { addMessage } = useContext(MessageContext);
   const { baseURL, model, apiKey, max_tokens, temperature, top_p } = useContext(SettingsContext);
 
-  const handleInputEnter = useCallback(async () => {
-    addMessage({ agent: Agent.User, timestamp: Date.now(), content: textInput });
-
+  const fetchCompletion = useCallback(() => {
     fetchOpenAICompletion({
       prompt: textInput,
       baseURL,
@@ -39,6 +38,21 @@ export function TextInput() {
 
     setTextInput('');
   }, [addMessage, apiKey, baseURL, max_tokens, model, temperature, textInput, top_p]);
+
+  const handleInputEnter = useCallback(async () => {
+    addMessage({ agent: Agent.User, timestamp: Date.now(), content: textInput });
+    setSendRequest(true);
+  }, [addMessage, textInput]);
+
+  // A fetch request will be triggered when handleInputEnter is called.
+  // We have to use a useEffect for this operation so that fetchCompletion
+  // has an up-to-date conversation index when the new message is added.
+  useEffect(() => {
+    if (sendRequest) {
+      fetchCompletion();
+      setSendRequest(false);
+    }
+  }, [fetchCompletion, sendRequest, textInput]);
 
   return (
     <Box

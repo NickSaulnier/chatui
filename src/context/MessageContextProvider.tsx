@@ -25,12 +25,8 @@ const MessageContextProvider = ({
   inputConversations?: Array<Conversation>;
 }) => {
   const [conversations, setConversations] = useState<Array<Conversation>>(inputConversations ?? []);
-  const [currentConversationIndex, setCurrentConversationIndex] = useState<number | null>(
-    inputConversations && inputConversations.length > 0 ? inputConversations.length - 1 : null,
-  );
-  const [currentMessages, setCurrentMessages] = useState<Array<Message>>(
-    inputConversations ? inputConversations[inputConversations.length - 1]?.messages : [],
-  );
+  const [currentConversationIndex, setCurrentConversationIndex] = useState<number | null>(null);
+  const [currentMessages, setCurrentMessages] = useState<Array<Message>>([]);
 
   const addConversation = useCallback(
     (newConversation: Conversation) => {
@@ -39,17 +35,20 @@ const MessageContextProvider = ({
     [conversations, setConversations],
   );
 
-  const createConversation = useCallback(() => {
-    const newConversation = {
-      messages: [],
-      summary: 'New conversation',
-      chatConfiguration: { chatApiEndpoint: '', headers: {} },
-    };
+  const createConversation = useCallback(
+    (messages?: Array<Message>) => {
+      const newConversation = {
+        messages: messages ?? [],
+        summary: 'New conversation',
+        chatConfiguration: { chatApiEndpoint: '', headers: {} },
+      };
 
-    addConversation(newConversation);
-    setCurrentConversationIndex(0);
-    setCurrentMessages([...newConversation.messages]);
-  }, [addConversation, setCurrentMessages, setCurrentConversationIndex]);
+      addConversation(newConversation);
+      setCurrentConversationIndex(0);
+      setCurrentMessages([...newConversation.messages]);
+    },
+    [addConversation, setCurrentMessages, setCurrentConversationIndex],
+  );
 
   const addMessage = useCallback(
     (message: Message) => {
@@ -57,24 +56,10 @@ const MessageContextProvider = ({
         conversations[currentConversationIndex].messages.push(message);
         setCurrentMessages([...conversations[currentConversationIndex].messages]);
       } else {
-        const newConversation = {
-          // TODO: Add settings page and pull down current values
-          messages: [message],
-          chatConfiguration: { chatApiEndpoint: '', headers: {} },
-        };
-
-        addConversation(newConversation);
-        setCurrentConversationIndex(0);
-        setCurrentMessages([...newConversation.messages]);
+        createConversation([message]);
       }
     },
-    [
-      conversations,
-      currentConversationIndex,
-      addConversation,
-      setCurrentConversationIndex,
-      setCurrentMessages,
-    ],
+    [currentConversationIndex, conversations, createConversation],
   );
 
   const getCurrentConversation = useCallback(() => {
