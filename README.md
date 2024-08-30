@@ -8,9 +8,10 @@ Example UI:
 
 ## TODO
 
+- Make Rename usable
 - Create UI for creating and managing conversations
   - Remove mock data
-  - Make delete and rename usable (requires db)
+  - Make delete usable (requires db)
 - Create loading components/styling for waiting on response
   - Switch to using streams when requesting completion
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
