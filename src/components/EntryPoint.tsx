@@ -6,7 +6,6 @@ import { TopBar } from './TopBar';
 import { ChatContainer } from './ChatContainer';
 import { customTheme } from '../theme/theme';
 import MessageContextProvider from '../context/MessageContextProvider';
-import { mockConversation } from '../context/MockMessageContextData';
 import { ConversationsContainer } from './ConversationsContainer';
 import { OpenAISettings } from './OpenAISettings';
 import { ROUTE_LINKS } from './constants';
@@ -19,7 +18,7 @@ export function EntryPoint() {
     <React.StrictMode>
       <ThemeProvider theme={customTheme}>
         <AuthenticationContextProvider>
-          <MessageContextProvider inputConversations={mockConversation}>
+          <MessageContextProvider>
             <SettingsContextProvider>
               <Router>
                 <TopBar />
