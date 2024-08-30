@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import { Agent, Message } from '../context/types';
+import Markdown from 'react-markdown';
 
 type ChatMessageProps = {
   Icon: React.ElementType;
@@ -48,11 +49,11 @@ export function ChatMessage({ Icon, message }: ChatMessageProps) {
             borderRadius: '12px',
             borderBottomLeftRadius: '0',
             backgroundColor: backgroundColor,
-            padding: theme.spacing(2),
+            padding: `0 ${theme.spacing(2)}`,
           })}
           variant="body1"
         >
-          {message.content}
+          <Markdown>{message.content}</Markdown>
         </Typography>
       </Box>
     </Box>
