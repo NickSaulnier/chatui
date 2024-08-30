@@ -1,17 +1,25 @@
 import { Box } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import { MessageContext } from '../context/MessageContextProvider';
 import { ChatMessage } from './ChatMessage';
 import { Agent } from '../context/types';
 
 export function MessageContainer() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { currentMessages } = useContext(MessageContext);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [currentMessages]);
 
   return (
     <Box
+      ref={containerRef}
       sx={(theme) => ({
         width: '100%',
         display: 'flex',
