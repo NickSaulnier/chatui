@@ -1,9 +1,9 @@
 import { Box, Checkbox, Slider, Typography, useTheme } from '@mui/material';
-import { useState } from 'react';
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
 
 type LabeledCheckboxAndSliderProps = {
   label: string;
-  onChange: (event: Event, value: number | number[]) => void;
+  onChange: (event: Event | ChangeEvent<HTMLInputElement>, value?: number | number[]) => void;
   min: number;
   max: number;
   step: number;
@@ -20,8 +20,23 @@ export function LabeledCheckboxAndSlider({
   value,
   defaultValue,
 }: LabeledCheckboxAndSliderProps) {
+  const sliderRef = useRef<HTMLInputElement>(null);
   const [disabled, setDisabled] = useState(value === undefined);
   const theme = useTheme();
+
+  const handleCheckboxChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+      setDisabled(!checked);
+
+      // Set the value to 'undefined' if the box is being unchecked.
+      if (!checked) {
+        onChange(event, undefined);
+      } else if (sliderRef.current) {
+        onChange(event, Number(sliderRef.current.textContent));
+      }
+    },
+    [onChange],
+  );
 
   return (
     <Box
@@ -48,7 +63,7 @@ export function LabeledCheckboxAndSlider({
       >
         <Checkbox
           checked={!disabled}
-          onChange={() => setDisabled(!disabled)}
+          onChange={handleCheckboxChange}
           style={{ color: theme.palette.primary.dark }}
         />
         <Slider
@@ -63,6 +78,7 @@ export function LabeledCheckboxAndSlider({
           getAriaValueText={(value) => `${value}`}
           disabled={disabled}
           onChange={onChange}
+          ref={sliderRef}
           sx={(theme) => ({
             width: '100%',
             margin: theme.spacing(1),
