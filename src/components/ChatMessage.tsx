@@ -27,7 +27,7 @@ export function ChatMessage({ Icon, message }: ChatMessageProps) {
     >
       <Box
         sx={(theme) => ({
-          width: '75%',
+          width: '85%',
           display: 'flex',
           justifyContent: justifyContent,
           alignItems: 'center',
