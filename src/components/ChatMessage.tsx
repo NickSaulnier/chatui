@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import Markdown from 'react-markdown';
 
 import { Agent, Message } from '../context/types';
+import tokens from '../theme/_tokens.scss';
 
 type ChatMessageProps = {
   Icon: React.ElementType;
@@ -44,18 +45,21 @@ export function ChatMessage({ Icon, message }: ChatMessageProps) {
             padding: '2px',
           }}
         />
-        <Typography
+        <Box
           sx={(theme) => ({
             border: 'solid 1px transparent',
             borderRadius: '12px',
             borderBottomLeftRadius: '0',
             backgroundColor: backgroundColor,
             padding: `0 ${theme.spacing(2)}`,
+            fontSize: tokens.body1FontSize,
+            fontWeight: tokens.body1FontWeight,
+            fontFamily: tokens.body1FontFamily,
+            color: theme.palette.text.primary,
           })}
-          variant="body1"
         >
           <Markdown>{message.content}</Markdown>
-        </Typography>
+        </Box>
       </Box>
     </Box>
   );
