@@ -12,8 +12,9 @@ Example UI:
 - Create UI for creating and managing conversations
   - Remove mock data
   - Make delete usable (requires db)
+- Fix chat window scroll to be full width
 - Consider any refactors that will make the project/components/styling more general. This might involve moving some code to an examples folder, adding the package to npm, and testing with an npm install.
-  - Move all context calls out of hooks I want to make generic and convert to props
+  - Move all context calls out of components I want to make generic and convert to props
 - Add githooks, lock down main branch
 - Add documentation where it is needed
 - Add some jest tests
