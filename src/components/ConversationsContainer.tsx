@@ -68,8 +68,9 @@ export function ConversationsContainer() {
                 setCurrentConversation(index);
                 navigate('/');
               }}
+              key={`conversation-${index}`}
             >
-              <Conversation key={`conversation-${index}`} conversation={conversation} />
+              <Conversation conversation={conversation} />
             </ConversationItem>
           ))}
         </List>
