@@ -9,6 +9,8 @@ const defaultMessageContext: MessageContextParams = {
   createConversation: () => {},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addMessage: (message: Message) => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addMessageStreamingChunk: (messageChunk: string) => {},
   getCurrentConversation: () => null,
   setCurrentConversation: () => {},
   currentMessages: [],
@@ -62,6 +64,24 @@ const MessageContextProvider = ({
     [currentConversationIndex, conversations, createConversation],
   );
 
+  const addMessageStreamingChunk = useCallback(
+    (messageChunk: string) => {
+      if (currentConversationIndex !== null) {
+        const currentMessage = conversations[currentConversationIndex].messages.pop();
+
+        // An empty message should be added before addMessageStreamingChunk is called for each
+        // chunk.
+        if (currentMessage) {
+          const newMessage = currentMessage?.content + messageChunk;
+          currentMessage.content = newMessage;
+          conversations[currentConversationIndex].messages.push(currentMessage);
+          setCurrentMessages([...conversations[currentConversationIndex].messages]);
+        }
+      }
+    },
+    [currentConversationIndex, conversations],
+  );
+
   const getCurrentConversation = useCallback(() => {
     return currentConversationIndex !== null ? conversations[currentConversationIndex] : null;
   }, [currentConversationIndex, conversations]);
@@ -80,6 +100,7 @@ const MessageContextProvider = ({
         addConversation,
         createConversation,
         addMessage,
+        addMessageStreamingChunk,
         getCurrentConversation,
         setCurrentConversation,
         currentMessages,

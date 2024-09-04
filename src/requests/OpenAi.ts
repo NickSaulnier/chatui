@@ -21,6 +21,7 @@ export async function fetchOpenAICompletion({
   apiKey,
   model,
   messages,
+  stream,
   ...props
 }: fetchOpenAICompletionProps) {
   const client = new OpenAI({
@@ -36,6 +37,7 @@ export async function fetchOpenAICompletion({
   const completion = await client.chat.completions.create({
     model,
     messages: conversation,
+    stream,
     ...props,
   });
 

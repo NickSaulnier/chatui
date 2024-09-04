@@ -11,8 +11,9 @@ import { SettingsContext } from '../context/SettingsContextProvider';
 export function TextInput() {
   const [textInput, setTextInput] = useState('');
   const [sendRequest, setSendRequest] = useState(false);
+  const [isStreamingCompletion, setIsStreamingCompletion] = useState(false);
 
-  const { addMessage } = useContext(MessageContext);
+  const { addMessage, addMessageStreamingChunk } = useContext(MessageContext);
   const { baseURL, model, apiKey, max_tokens, temperature, top_p } = useContext(SettingsContext);
 
   const fetchCompletion = useCallback(() => {
@@ -25,23 +26,48 @@ export function TextInput() {
       max_tokens,
       temperature,
       top_p,
+      stream: true,
+    })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }).then((completion: any) => {
-      if (completion?.choices[0].message.content) {
+      .then(async (completion: any) => {
+        // Add an empty message to hold the streaming message chunks.
         addMessage({
           agent: Agent.Bot,
           timestamp: Date.now(),
-          content: completion.choices[0].message.content,
+          content: '',
         });
-      }
-    });
+
+        for await (const chunk of completion.iterator()) {
+          addMessageStreamingChunk(chunk.choices[0].delta.content || '');
+        }
+
+        // Re-enable the input button once the completion is fully received.
+        setIsStreamingCompletion(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        // Ensure more requests can be sent
+        setIsStreamingCompletion(false);
+      });
 
     setTextInput('');
-  }, [addMessage, apiKey, baseURL, max_tokens, model, temperature, textInput, top_p]);
+  }, [
+    addMessage,
+    addMessageStreamingChunk,
+    setIsStreamingCompletion,
+    apiKey,
+    baseURL,
+    max_tokens,
+    model,
+    temperature,
+    textInput,
+    top_p,
+  ]);
 
   const handleInputEnter = useCallback(async () => {
     addMessage({ agent: Agent.User, timestamp: Date.now(), content: textInput });
     setSendRequest(true);
+    setIsStreamingCompletion(true);
   }, [addMessage, textInput]);
 
   // A fetch request will be triggered when handleInputEnter is called.
@@ -106,7 +132,10 @@ export function TextInput() {
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
         />
-        <InputButton disabled={textInput === ''} onClick={handleInputEnter} />
+        <InputButton
+          disabled={textInput === '' || isStreamingCompletion}
+          onClick={handleInputEnter}
+        />
       </Box>
     </Box>
   );
