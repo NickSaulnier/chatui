@@ -28,7 +28,6 @@ export function LabeledCheckboxAndSlider({
     (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
       setDisabled(!checked);
 
-      // Set the value to 'undefined' if the box is being unchecked.
       if (!checked) {
         onChange(event, undefined);
       } else if (sliderRef.current) {
